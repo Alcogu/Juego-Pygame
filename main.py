@@ -7,8 +7,8 @@ verde = [47, 163, 41]
 blanco = [255,255,255]
 negro = [0,0,0]
 
-ancho = 650
-alto = 350
+ancho = 900
+alto = 500
 
 if __name__ == "__main__":
     pygame.init()
