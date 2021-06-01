@@ -1,7 +1,8 @@
 import pygame
+from bloques import Bloques
 
-ancho = 900
-alto = 500
+ancho = 640
+alto = 420
 
 class Personaje(pygame.sprite.Sprite):
 
@@ -17,8 +18,8 @@ class Personaje(pygame.sprite.Sprite):
         self.image = self.m[self.dir][self.col]
         self.rect = self.image.get_rect()
 
-        self.rect.x = 200
-        self.rect.y = 200
+        self.rect.x = 20
+        self.rect.y = 20
         self.velx = 0
         self.vely = 0
         self.salud = 100

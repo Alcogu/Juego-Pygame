@@ -2,6 +2,7 @@ import pygame
 import sys
 from personaje import Personaje
 from matriz import recorte
+from bloques import Bloques
 
 azul = [76,160,233]
 rojo = [245,15,15]
@@ -39,9 +40,25 @@ if __name__ == "__main__":
 
     m=recorte(sp_ancho, sp_alto, imgPersonaje)
 
-    desp=0
+    desp=4
     p=Personaje(m, [0, 2], desp)
     personajes.add(p)
+
+    bloques = pygame.sprite.Group()
+
+    bl_ancho=2
+    bl_alto=12
+    imgBloque = pygame.image.load('Juego-Pygame/imagenes/bloques.png')
+
+    mb=recorte(bl_ancho, bl_alto, imgBloque)
+
+    b=Bloques([70, 70], mb, [0, 0], despb=3)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    p.bloques=bloques
     
     col=0
     reloj=pygame.time.Clock()
@@ -89,8 +106,12 @@ if __name__ == "__main__":
             f_vy = 0
             
         personajes.update()
+        bloques.update()
+
         pantalla.blit(fondo,[f_x, f_y])
         personajes.draw(pantalla)
+        bloques.draw(pantalla)
+
         pygame.display.flip()
         reloj.tick(20)
         if col < 2:
