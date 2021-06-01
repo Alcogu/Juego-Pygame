@@ -9,8 +9,8 @@ verde = [47, 163, 41]
 blanco = [255,255,255]
 negro = [0,0,0]
 
-ancho = 800
-alto = 500
+ancho = 640
+alto = 420
 
 if __name__ == "__main__":
     pygame.init()
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font(None, 32)
 
-    fondo = pygame.image.load('fondo3.jpg')
+    fondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado.jpg')
     info = fondo.get_rect()
     f_ancho=info[2]
     f_alto=info[3]
@@ -28,15 +28,14 @@ if __name__ == "__main__":
     f_vy = 0
     f_limx = ancho - f_ancho
     f_limy = alto - f_alto
-    lim_d = 700
-    lim_a = 450
+    lim_d = 620
+    lim_a = 400
     
-
     personajes=pygame.sprite.Group()
 
     sp_ancho=12
     sp_alto=8
-    imgPersonaje = pygame.image.load('centauros.png')
+    imgPersonaje = pygame.image.load('Juego-Pygame/imagenes/centauros.png')
 
     m=recorte(sp_ancho, sp_alto, imgPersonaje)
 
@@ -89,7 +88,6 @@ if __name__ == "__main__":
         else:
             f_vy = 0
             
-
         personajes.update()
         pantalla.blit(fondo,[f_x, f_y])
         personajes.draw(pantalla)
