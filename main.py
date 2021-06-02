@@ -27,8 +27,8 @@ if __name__ == "__main__":
     f_vx = 0
     f_y = 0
     f_vy = 0
-    f_limx = ancho - f_ancho
-    f_limy = alto - f_alto
+    """f_limx = ancho - f_ancho
+    f_limy = alto - f_alto"""
     lim_d = 620
     lim_a = 400
     
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     mb=recorte(bl_ancho, bl_alto, imgBloque)
 
-    b=Bloques([70, 70], mb, [0, 0], despb=3)
+    b=Bloques([90, 90], mb, [0, 0], despb=3)
     bloques.add(b)
 
     b=Bloques([200, 200], mb, [1, 1], despb=6)
@@ -95,15 +95,21 @@ if __name__ == "__main__":
     
         if p.rect.right > lim_d:
             p.rect.right = lim_d
-            f_vx = -4
+            f_vx = -5
         else:
             f_vx = 0
 
         if p.rect.bottom > lim_a:
             p.rect.bottom = lim_a
-            f_vy = -4
+            f_vy = -5
         else:
             f_vy = 0
+
+        for b in bloques:    
+            b.vely = f_vy
+
+        for b in bloques:
+            b.velx = f_vx
             
         personajes.update()
         bloques.update()
@@ -113,14 +119,10 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
 
         pygame.display.flip()
-        reloj.tick(20)
-        if col < 2:
-            col+=1
-        else:
-            col=0
+        reloj.tick(70)
 
-        if f_x > f_limx:
+        """if f_x > f_limx:
             f_x+=f_vx
 
         if f_y > f_limy:
-            f_y+=f_vy
+            f_y+=f_vy"""
