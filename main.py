@@ -27,8 +27,8 @@ if __name__ == "__main__":
     f_vx = 0
     f_y = 0
     f_vy = 0
-    """f_limx = ancho - f_ancho
-    f_limy = alto - f_alto"""
+    f_limx = ancho - f_ancho
+    f_limy = alto - f_alto
     lim_d = 620
     lim_a = 400
     
@@ -119,10 +119,10 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
 
         pygame.display.flip()
-        reloj.tick(70)
+        reloj.tick(35)
 
-        """if f_x > f_limx:
+        if f_x > f_limx:
             f_x+=f_vx
 
         if f_y > f_limy:
-            f_y+=f_vy"""
+            f_y+=f_vy
