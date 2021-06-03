@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     m=recorte(sp_ancho, sp_alto, imgPersonaje)
 
-    desp=4
+    desp=0
     p=Personaje(m, [0, 2], desp)
     personajes.add(p)
 

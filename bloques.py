@@ -14,7 +14,7 @@ class Bloques(pygame.sprite.Sprite):
         self.anm_fin=lim_anim[1]
 
         self.col=self.anm_ini
-        self.dir=0+despb
+        self.dir=despb
 
         self.image = self.mb[self.dir][self.col]
         self.rect = self.image.get_rect()

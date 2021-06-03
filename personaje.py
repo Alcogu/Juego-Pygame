@@ -13,7 +13,7 @@ class Personaje(pygame.sprite.Sprite):
         self.anm_fin=lim_anim[1]
 
         self.col=self.anm_ini
-        self.dir=0+desp
+        self.dir=desp
 
         self.image = self.m[self.dir][self.col]
         self.rect = self.image.get_rect()
