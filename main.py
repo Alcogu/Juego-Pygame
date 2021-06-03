@@ -3,6 +3,7 @@ import sys
 from personaje import Personaje
 from matriz import recorte
 from bloques import Bloques
+from fondo import Fondo
 
 azul = [76,160,233]
 rojo = [245,15,15]
@@ -19,7 +20,8 @@ if __name__ == "__main__":
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font(None, 32)
 
-    fondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado.jpg')
+    fondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado2.jpg')
+    #fondo = pygame.image.load('fondo3.jpg')
     info = fondo.get_rect()
     f_ancho=info[2]
     f_alto=info[3]
@@ -52,7 +54,61 @@ if __name__ == "__main__":
 
     mb=recorte(bl_ancho, bl_alto, imgBloque)
 
-    b=Bloques([90, 90], mb, [0, 0], despb=3)
+    b=Bloques([120, 120], mb, [0, 0], despb=0)
+    bloques.add(b)
+
+    b=Bloques([210, 210], mb, [1, 1], despb=0)
+    bloques.add(b)
+
+    b=Bloques([645, 10], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([1200, 340], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([1600, 332], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([1700, 85], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([1800, 175], mb, [1, 1], despb=9)
+    bloques.add(b)
+    """
+    b=Bloques([2200, 175], mb, [1, 1], despb=9)
+    bloques.add(b)
+
+    b=Bloques([2800, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+    
+    b=Bloques([3500, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([4500, 200], mb, [1, 1], despb=9)
+    bloques.add(b)
+
+    b=Bloques([5500, 200], mb, [1, 1], despb=9)
+    bloques.add(b)"""
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
+    bloques.add(b)
+
+    b=Bloques([200, 200], mb, [1, 1], despb=6)
     bloques.add(b)
 
     b=Bloques([200, 200], mb, [1, 1], despb=6)
@@ -105,11 +161,9 @@ if __name__ == "__main__":
         else:
             f_vy = 0
 
-        for b in bloques:    
-            b.vely = f_vy
-
         for b in bloques:
-            b.velx = f_vx
+            b.velx = f_vx   
+            b.vely = f_vy
             
         personajes.update()
         bloques.update()
@@ -119,7 +173,7 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
 
         pygame.display.flip()
-        reloj.tick(35)
+        reloj.tick(70)
 
         if f_x > f_limx:
             f_x+=f_vx

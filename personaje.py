@@ -1,5 +1,4 @@
 import pygame
-from bloques import Bloques
 
 ancho = 640
 alto = 420
@@ -51,6 +50,7 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.right > ancho:
             self.rect.right = ancho
+            self.bloques.velx = 0
 
         self.rect.y += self.vely
 
