@@ -20,34 +20,27 @@ if __name__ == "__main__":
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font(None, 32)
 
-    fondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado2.jpg')
-    #fondo = pygame.image.load('fondo3.jpg')
-    info = fondo.get_rect()
-    f_ancho=info[2]
-    f_alto=info[3]
-    f_x = 0
-    f_vx = 0
-    f_y = 0
-    f_vy = 0
-    f_limx = ancho - f_ancho
-    f_limy = alto - f_alto
-    lim_d = 620
-    lim_a = 400
     
+    #Fondo = pygame.image.load('fondo3.jpg')
+    fondos=pygame.sprite.Group()
     personajes=pygame.sprite.Group()
+    bloques = pygame.sprite.Group()
+
+    imgFondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado2.jpg')
+
+    f=Fondo(imgFondo)
+    fondos.add(f)
+    
+    imgPersonaje = pygame.image.load('Juego-Pygame/imagenes/centauros.png')
 
     sp_ancho=12
     sp_alto=8
-    imgPersonaje = pygame.image.load('Juego-Pygame/imagenes/centauros.png')
-
     m=recorte(sp_ancho, sp_alto, imgPersonaje)
-
     desp=0
     p=Personaje(m, [0, 2], desp)
     personajes.add(p)
 
-    bloques = pygame.sprite.Group()
-
+    
     bl_ancho=2
     bl_alto=12
     imgBloque = pygame.image.load('Juego-Pygame/imagenes/bloques.png')
@@ -74,8 +67,8 @@ if __name__ == "__main__":
 
     b=Bloques([1800, 175], mb, [1, 1], despb=9)
     bloques.add(b)
-    """
-    b=Bloques([2200, 175], mb, [1, 1], despb=9)
+    
+    """b=Bloques([2200, 175], mb, [1, 1], despb=9)
     bloques.add(b)
 
     b=Bloques([2800, 200], mb, [1, 1], despb=6)
@@ -149,34 +142,34 @@ if __name__ == "__main__":
                     p.vely = 0
                     p.dir = desp + 1
     
-        if p.rect.right > lim_d:
-            p.rect.right = lim_d
-            f_vx = -5
+        if p.rect.right > f.lim_d:
+            p.rect.right = f.lim_d
+            f.f_vx = -5
         else:
-            f_vx = 0
+            f.f_vx = 0
 
-        if p.rect.bottom > lim_a:
-            p.rect.bottom = lim_a
-            f_vy = -5
+        if p.rect.bottom > f.lim_a:
+            p.rect.bottom = f.lim_a
+            f.f_vy = -5
         else:
-            f_vy = 0
+            f.f_vy = 0
 
         for b in bloques:
-            b.velx = f_vx   
-            b.vely = f_vy
+            b.velx = f.f_vx   
+            b.vely = f.f_vy
             
         personajes.update()
         bloques.update()
 
-        pantalla.blit(fondo,[f_x, f_y])
+        pantalla.blit(imgFondo,[f.f_x, f.f_y])
         personajes.draw(pantalla)
         bloques.draw(pantalla)
 
         pygame.display.flip()
         reloj.tick(70)
 
-        if f_x > f_limx:
-            f_x+=f_vx
+        if f.f_x > f.f_limx:
+            f.f_x+=f.f_vx
 
-        if f_y > f_limy:
-            f_y+=f_vy
+        if f.f_y > f.f_limy:
+            f.f_y+=f.f_vy
