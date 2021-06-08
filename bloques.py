@@ -1,10 +1,5 @@
 import pygame
 
-blanco = [255,255,255]
-
-ancho = 640
-alto = 420
-
 class Bloques(pygame.sprite.Sprite):
 
     def __init__(self, pos, mb, lim_anim=[0,2], despb=0):

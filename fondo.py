@@ -1,7 +1,5 @@
 import pygame
-
-ancho = 640
-alto = 420
+from constantes import *
 
 class Fondo(pygame.sprite.Sprite):
 
@@ -23,8 +21,8 @@ class Fondo(pygame.sprite.Sprite):
         self.f_vy = 0
         self.f_limx = ancho - self.f_ancho
         self.f_limy = alto - self.f_alto
-        self.lim_d = 620
-        self.lim_a = 400
+        self.lim_d = ancho-20
+        self.lim_a = alto-20
 
     def update(self):
         self.rect.x += self.velx

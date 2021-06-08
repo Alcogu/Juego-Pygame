@@ -1,7 +1,5 @@
 import pygame
-
-ancho = 640
-alto = 420
+from constantes import *
 
 class Personaje(pygame.sprite.Sprite):
 
@@ -44,6 +42,9 @@ class Personaje(pygame.sprite.Sprite):
                 if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
             self.velx=0
+            """#Sonido al colicionar
+            sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
+            sound.play()"""
 
         if self.rect.x < 0:
             self.rect.left = 0
@@ -63,6 +64,9 @@ class Personaje(pygame.sprite.Sprite):
                 if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
             self.vely=0
+            """#Sonido al colicionar
+            sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
+            sound.play()"""
 
         if self.rect.y < 0:
             self.rect.y = 0

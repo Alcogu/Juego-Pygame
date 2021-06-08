@@ -1,18 +1,11 @@
 import pygame
 import sys
+
 from personaje import Personaje
 from matriz import recorte
 from bloques import Bloques
 from fondo import Fondo
-
-azul = [76,160,233]
-rojo = [245,15,15]
-verde = [47, 163, 41]
-blanco = [255,255,255]
-negro = [0,0,0]
-
-ancho = 640
-alto = 420
+from constantes import *
 
 if __name__ == "__main__":
     pygame.init()
@@ -22,11 +15,10 @@ if __name__ == "__main__":
     fuente = pygame.font.Font('freesansbold.ttf', 25)
 
     #Música de fondo
-    pygame.mixer.music.load('Juego-Pygame/sounds/mdf.wav')
+    pygame.mixer.music.load('sounds/kokiri.wav')
     #Primer valor para que la cancion no debe de sonar y segundo punto de inicio de la cancion
     pygame.mixer.music.play(-1, 0.0)
     #La canción va bajando volumen a medida que se va terminando
-    #pygame.mixer.music.fadeout(50000)
     
     #grupos
     fondos=pygame.sprite.Group()
@@ -34,9 +26,9 @@ if __name__ == "__main__":
     bloques = pygame.sprite.Group()
 
     #Imagenes
-    imgFondo = pygame.image.load('Juego-Pygame/imagenes/fondoprado2.jpg')
-    imgPersonaje = pygame.image.load('Juego-Pygame/imagenes/centauros.png')
-    imgBloque = pygame.image.load('Juego-Pygame/imagenes/bloques.png')
+    imgFondo = pygame.image.load('imagenes/fondoprado2.jpg')
+    imgPersonaje = pygame.image.load('imagenes/centauros.png')
+    imgBloque = pygame.image.load('imagenes/bloques.png')
 
     f=Fondo(imgFondo)
     fondos.add(f)
@@ -48,7 +40,7 @@ if __name__ == "__main__":
 
     #Eleccion del pj y sus movimientos
     desp=0
-    p=Personaje(m, [0, 2], desp)
+    p=Personaje(m, [3, 5], desp)
     personajes.add(p)
 
     #Recorte de la imagen para los bloques
@@ -188,7 +180,7 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
 
         pygame.display.flip()
-        reloj.tick(70)
+        reloj.tick(30)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:
