@@ -5,9 +5,9 @@ class Fondo(pygame.sprite.Sprite):
 
     def __init__(self, m):
         pygame.sprite.Sprite.__init__(self)
-        self.fondo=m
-        self.image=self.fondo
-        self.rect=self.image.get_rect()
+        self.fondo = m
+        self.image = self.fondo
+        self.rect = self.image.get_rect()
         self.rect.x = 0
         self.rect.y = 0
         self.velx = 0
@@ -21,8 +21,8 @@ class Fondo(pygame.sprite.Sprite):
         self.f_vy = 0
         self.f_limx = ancho - self.f_ancho
         self.f_limy = alto - self.f_alto
-        self.lim_d = ancho-20
-        self.lim_a = alto-20
+        self.lim_d = ancho - 20
+        self.lim_a = alto - 20
 
     def update(self):
         self.rect.x += self.velx

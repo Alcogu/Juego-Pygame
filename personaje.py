@@ -22,6 +22,7 @@ class Personaje(pygame.sprite.Sprite):
         self.salud = 100
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
+        self.enemigos = pygame.sprite.Group()
 
     def update(self):
         if self.velx != self.vely:
@@ -44,7 +45,7 @@ class Personaje(pygame.sprite.Sprite):
                     self.rect.left = b.rect.right
             self.velx=0
 
-        if self.rect.x < 0:
+        if self.rect.left < 0:
             self.rect.left = 0
 
         if self.rect.right > ancho:
@@ -61,12 +62,29 @@ class Personaje(pygame.sprite.Sprite):
                     self.rect.left = g.rect.right
             self.velx=0
 
-        if self.rect.x < 0:
+        if self.rect.left < 0:
             self.rect.left = 0
 
         if self.rect.right > ancho:
             self.rect.right = ancho
             self.generadores.velx = 0
+
+        col = pygame.sprite.spritecollide(self, self.enemigos, False)
+        for e in col: 
+            if self.velx > 0:
+                if self.rect.right > e.rect.left:
+                    self.rect.right = e.rect.left
+            else:
+                if self.rect.left < e.rect.right:
+                    self.rect.left = e.rect.right
+            self.velx=0
+
+        if self.rect.left < 0:
+            self.rect.left = 0
+
+        if self.rect.right > ancho:
+            self.rect.right = ancho
+            self.enemigos.velx = 0
 
         self.rect.y += self.vely
         
@@ -80,14 +98,12 @@ class Personaje(pygame.sprite.Sprite):
                     self.rect.top = b.rect.bottom
             self.vely=0
 
-        if self.rect.y < 0:
+        if self.rect.top < 0:
             self.rect.top = 0
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
             self.bloques.vely = 0
-                
-        
         
         col = pygame.sprite.spritecollide(self, self.generadores, False)
 
@@ -100,7 +116,24 @@ class Personaje(pygame.sprite.Sprite):
                     self.rect.top = g.rect.bottom
             self.vely=0
 
-        if self.rect.y < 0:
+        if self.rect.top < 0:
+            self.rect.top = 0
+
+        if self.rect.bottom > alto:
+            self.rect.bottom = alto
+            self.bloques.vely = 0
+
+        col = pygame.sprite.spritecollide(self, self.enemigos, False)
+        for e in col: 
+            if self.vely > 0:
+                if self.rect.bottom > e.rect.top:
+                    self.rect.bottom = e.rect.top
+            else:
+                if self.rect.top < e.rect.bottom:
+                    self.rect.top = e.rect.bottom
+            self.vely=0
+
+        if self.rect.top < 0:
             self.rect.top = 0
 
         if self.rect.bottom > alto:

@@ -50,6 +50,18 @@ if __name__ == "__main__":
     g.limite=limite
     generadores.add(g)
 
+    g = Generador([350, 1100], mg, [1, 1], despg=0)
+    g.limite=limite
+    generadores.add(g)
+
+    """g = Generador([350, 75], mg, [1, 1], despg=0)
+    g.limite=limite
+    generadores.add(g)
+
+    g = Generador([350, 75], mg, [1, 1], despg=0)
+    g.limite=limite
+    generadores.add(g)"""
+
     #Recorte imagen del PJ
     sp_ancho=12
     sp_alto=8
@@ -132,6 +144,7 @@ if __name__ == "__main__":
 
     p.bloques = bloques
     p.generadores = generadores
+    p.enemigos = enemigos
     
     #col=0
     reloj=pygame.time.Clock()
@@ -166,6 +179,15 @@ if __name__ == "__main__":
                     p.velx = -5
                     p.vely = 0
                     p.dir = desp + 1
+
+        for enem in generadores:
+            if enem.crear and (enem.limite > len(enemigos)):
+                e = Enemigos((enem.RetPos()), me, despe = 1)
+                enemigos.add(e)
+
+                e.bloques = bloques
+                #e.generadores = generadores
+                e.personajes = personajes
     
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
@@ -181,10 +203,7 @@ if __name__ == "__main__":
         else:
             f.f_vy = 0
 
-        for enem in generadores:
-            if enem.crear and (enem.limite > len(enemigos)):
-                e = Enemigos((enem.RetPos()), me, despe = 1)
-                enemigos.add(e)
+        
 
         for b in bloques:
             b.velx = f.f_vx   
