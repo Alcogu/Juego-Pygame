@@ -22,7 +22,7 @@ class Generador(pygame.sprite.Sprite):
         self.vely = 0
         self.temp = 10
         self.crear = False
-        self.limite = 7
+        self.limite = 2
 
     def RetPos(self):
         px = self.rect.left - 10

@@ -183,11 +183,8 @@ if __name__ == "__main__":
 
         for enem in generadores:
             if enem.crear and (enem.limite > len(enemigos)):
-                #Crear goma
-                e = Enemigos((enem.RetPos()), me, despe=2)
+                e = Enemigos((enem.RetPos()), me, despe = 1)
                 enemigos.add(e)
-                """e.crear=False
-                e.temp = 100"""
 
         for b in bloques:
             b.velx = f.f_vx   
@@ -205,8 +202,8 @@ if __name__ == "__main__":
 
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
-        info = "Tiempo: " + str(tiempo)
-        texto = fuente.render(info, False, blanco)
+        infoTime = "Tiempo: " + str(tiempo)
+        texto = fuente.render(infoTime, False, blanco)
 
         #Se dibuja en pantalla
         pantallaprincipal.fill(negro)

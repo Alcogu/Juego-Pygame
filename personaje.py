@@ -32,7 +32,6 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 self.col=self.anm_ini
 
-
         self.rect.x += self.velx
             
         col = pygame.sprite.spritecollide(self, self.bloques, False)

@@ -1,4 +1,5 @@
 import pygame
+
 from constantes import *
 
 class Enemigos(pygame.sprite.Sprite):
@@ -23,7 +24,7 @@ class Enemigos(pygame.sprite.Sprite):
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
         self.disparar = False
-        self.temp = 100
+        self.temp = 10
 
     def update(self):
 
@@ -31,8 +32,8 @@ class Enemigos(pygame.sprite.Sprite):
 
         if self.rect.right > ancho:
             self.velx = -5
-            #self.dir + 2
+            self.dir = self.desp + 1
         
         if self.rect.left < 0:
             self.velx = 5
-            #self.dir + 1
+            self.dir = self.desp + 2
