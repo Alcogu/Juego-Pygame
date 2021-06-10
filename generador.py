@@ -30,6 +30,9 @@ class Generador(pygame.sprite.Sprite):
         return ([px, py])
 
     def update(self):
+        self.rect.x += self.velx
+        self.rect.y += self.vely
+        
         self.temp-=1
         if self.temp <= 0:
             self.crear=True

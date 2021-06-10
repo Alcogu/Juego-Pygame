@@ -9,6 +9,9 @@ verdeclaro = [61,174,87]
 ancho = 640
 alto = 420
 
+anchoIma = 1920
+altoIma = 1281
+
 
 """#Sonido al colicionar
     sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')

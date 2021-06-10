@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 
 from personaje import Personaje
 from matriz import recorte
@@ -65,11 +64,6 @@ if __name__ == "__main__":
     en_ancho=3
     en_alto=4
     me = recorte(en_ancho, en_alto, imgEnemigo)
-
-    #Eleccion del pj y sus movimientos
-    """despe=0
-    e = Enemigos([350, 75], me, [0, 2], despe)
-    enemigos.add(e)"""
 
     #Recorte de la imagen para los bloques
     bl_ancho=2
@@ -190,10 +184,10 @@ if __name__ == "__main__":
         for enem in generadores:
             if enem.crear and (enem.limite > len(enemigos)):
                 #Crear goma
-                e = Enemigos((enem.RetPos()), me, [0, 2], despe=2)
+                e = Enemigos((enem.RetPos()), me, despe=2)
                 enemigos.add(e)
-                e.crear=False
-                e.temp = 100
+                """e.crear=False
+                e.temp = 100"""
 
         for b in bloques:
             b.velx = f.f_vx   
@@ -202,10 +196,6 @@ if __name__ == "__main__":
         for g in generadores:
             g.velx = f.f_vx   
             g.vely = f.f_vy
-
-        """for e in enemigos:
-            e.velx = f.f_vx   
-            e.vely = f.f_vy"""
             
         #Actualizaciones
         personajes.update()
