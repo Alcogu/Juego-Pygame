@@ -1,4 +1,5 @@
 import pygame
+
 from constantes import *
 
 class Generador(pygame.sprite.Sprite):
@@ -19,7 +20,16 @@ class Generador(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
+        self.temp = 10
+        self.crear = False
+        self.limite = 7
+
+    def RetPos(self):
+        px = self.rect.left - 10
+        py = self.rect.top + 10
+        return ([px, py])
 
     def update(self):
-        self.rect.x += self.velx
-        self.rect.y += self.vely
+        self.temp-=1
+        if self.temp <= 0:
+            self.crear=True

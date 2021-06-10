@@ -1,4 +1,3 @@
-import pygame
 
 azul = [76,160,233]
 rojo = [245,15,15]
@@ -9,3 +8,8 @@ verdeclaro = [61,174,87]
 
 ancho = 640
 alto = 420
+
+
+"""#Sonido al colicionar
+    sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
+    sound.play()"""

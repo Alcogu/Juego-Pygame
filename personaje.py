@@ -3,7 +3,7 @@ from constantes import *
 
 class Personaje(pygame.sprite.Sprite):
 
-    def __init__(self, m, lim_anim=[0,2], desp=0):
+    def __init__(self, m, lim_anim = [0,2], desp = 0):
         pygame.sprite.Sprite.__init__(self)
         self.m=m
         self.anm_ini=lim_anim[0]
@@ -21,6 +21,7 @@ class Personaje(pygame.sprite.Sprite):
         self.vely = 0
         self.salud = 100
         self.bloques = pygame.sprite.Group()
+        self.generadores = pygame.sprite.Group()
 
     def update(self):
         if self.velx != self.vely:
@@ -31,8 +32,9 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 self.col=self.anm_ini
 
-            self.rect.x += self.velx
 
+        self.rect.x += self.velx
+            
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.velx > 0:
@@ -42,9 +44,6 @@ class Personaje(pygame.sprite.Sprite):
                 if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
             self.velx=0
-            """#Sonido al colicionar
-            sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
-            sound.play()"""
 
         if self.rect.x < 0:
             self.rect.left = 0
@@ -53,8 +52,25 @@ class Personaje(pygame.sprite.Sprite):
             self.rect.right = ancho
             self.bloques.velx = 0
 
-        self.rect.y += self.vely
+        col = pygame.sprite.spritecollide(self, self.generadores, False)
+        for g in col: 
+            if self.velx > 0:
+                if self.rect.right > g.rect.left:
+                    self.rect.right = g.rect.left
+            else:
+                if self.rect.left < g.rect.right:
+                    self.rect.left = g.rect.right
+            self.velx=0
 
+        if self.rect.x < 0:
+            self.rect.left = 0
+
+        if self.rect.right > ancho:
+            self.rect.right = ancho
+            self.generadores.velx = 0
+
+        self.rect.y += self.vely
+        
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.vely > 0:
@@ -64,12 +80,30 @@ class Personaje(pygame.sprite.Sprite):
                 if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
             self.vely=0
-            """#Sonido al colicionar
-            sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
-            sound.play()"""
 
         if self.rect.y < 0:
-            self.rect.y = 0
+            self.rect.top = 0
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
+            self.bloques.vely = 0
+                
+        
+        
+        col = pygame.sprite.spritecollide(self, self.generadores, False)
+
+        for g in col: 
+            if self.vely > 0:
+                if self.rect.bottom > g.rect.top:
+                    self.rect.bottom = g.rect.top
+            else:
+                if self.rect.top < g.rect.bottom:
+                    self.rect.top = g.rect.bottom
+            self.vely=0
+
+        if self.rect.y < 0:
+            self.rect.top = 0
+
+        if self.rect.bottom > alto:
+            self.rect.bottom = alto
+            self.bloques.vely = 0

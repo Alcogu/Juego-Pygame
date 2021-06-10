@@ -1,11 +1,13 @@
 import pygame
 import sys
+import random
 
 from personaje import Personaje
 from matriz import recorte
 from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
+from enemigos import Enemigos
 from constantes import *
 
 if __name__ == "__main__":
@@ -14,6 +16,7 @@ if __name__ == "__main__":
     pantalla = pygame.Surface((ancho, alto-30))
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
+    limite = 10
 
     #Música de fondo
     pygame.mixer.music.load('sounds/mdf.wav')
@@ -26,24 +29,28 @@ if __name__ == "__main__":
     personajes=pygame.sprite.Group()
     bloques = pygame.sprite.Group()
     generadores = pygame.sprite.Group()
+    enemigos = pygame.sprite.Group()
 
     #Imagenes
-    imgFondo = pygame.image.load('imagenes/fondoprado2.jpg')
-    imgPersonaje = pygame.image.load('imagenes/centauros.png')
-    imgBloque = pygame.image.load('imagenes/bloques.png')
-    imgGenerador = pygame.image.load('imagenes/mazmorra.jpg')
+    imgFondo = pygame.image.load('imagenes/fondoprado2.jpg').convert_alpha()
+    imgPersonaje = pygame.image.load('imagenes/centauros.png').convert_alpha()
+    imgBloque = pygame.image.load('imagenes/bloques.png').convert_alpha()
+    imgGenerador = pygame.image.load('imagenes/fosa.png').convert_alpha()
+    imgEnemigo = pygame.image.load('imagenes/dogs.png').convert_alpha()
 
     f=Fondo(imgFondo)
     fondos.add(f)
 
     #recorte generador
-    gen_ancho=5
+    gen_ancho=4
     gen_alto=5
     mg = recorte(gen_ancho, gen_alto, imgGenerador)
     
     #Generador
-    g = Generador([300, 170], mg, [0, 0], despg=3)
+    g = Generador([350, 75], mg, [1, 1], despg=0)
+    g.limite=limite
     generadores.add(g)
+
     #Recorte imagen del PJ
     sp_ancho=12
     sp_alto=8
@@ -54,12 +61,22 @@ if __name__ == "__main__":
     p = Personaje(m, [3, 5], desp)
     personajes.add(p)
 
+    #Recorte imagen de Enemigos
+    en_ancho=3
+    en_alto=4
+    me = recorte(en_ancho, en_alto, imgEnemigo)
+
+    #Eleccion del pj y sus movimientos
+    """despe=0
+    e = Enemigos([350, 75], me, [0, 2], despe)
+    enemigos.add(e)"""
+
     #Recorte de la imagen para los bloques
     bl_ancho=2
     bl_alto=12
     mb=recorte(bl_ancho, bl_alto, imgBloque)
 
-    b=Bloques([120, 120], mb, [0, 0], despb=0)
+    b=Bloques([100, 120], mb, [0, 0], despb=0)
     bloques.add(b)
 
     b=Bloques([210, 210], mb, [1, 1], despb=3)
@@ -119,9 +136,10 @@ if __name__ == "__main__":
     b=Bloques([1850, 1199], mb, [1, 1], despb=9)
     bloques.add(b)
 
-    p.bloques=bloques
+    p.bloques = bloques
+    p.generadores = generadores
     
-    col=0
+    #col=0
     reloj=pygame.time.Clock()
 
     while True:
@@ -169,14 +187,31 @@ if __name__ == "__main__":
         else:
             f.f_vy = 0
 
+        for enem in generadores:
+            if enem.crear and (enem.limite > len(enemigos)):
+                #Crear goma
+                e = Enemigos((enem.RetPos()), me, [0, 2], despe=2)
+                enemigos.add(e)
+                e.crear=False
+                e.temp = 100
+
         for b in bloques:
             b.velx = f.f_vx   
             b.vely = f.f_vy
+
+        for g in generadores:
+            g.velx = f.f_vx   
+            g.vely = f.f_vy
+
+        """for e in enemigos:
+            e.velx = f.f_vx   
+            e.vely = f.f_vy"""
             
         #Actualizaciones
         personajes.update()
         bloques.update()
         generadores.update()
+        enemigos.update()
 
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -188,12 +223,14 @@ if __name__ == "__main__":
         pantallaprincipal.blit(pantalla, (0,30))
         pantalla.blit(imgFondo,[f.f_x, f.f_y])
         pantallaprincipal.blit(texto, [2, 2])
+        
         personajes.draw(pantalla)
         bloques.draw(pantalla)
         generadores.draw(pantalla)
+        enemigos.draw(pantalla)
 
         pygame.display.flip()
-        reloj.tick(30)
+        reloj.tick(20)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:
