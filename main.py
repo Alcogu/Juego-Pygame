@@ -50,9 +50,9 @@ if __name__ == "__main__":
     g.limite=limite
     generadores.add(g)
 
-    g = Generador([350, 1100], mg, [1, 1], despg=0)
+    """g = Generador([350, 1100], mg, [1, 1], despg=0)
     g.limite=limite
-    generadores.add(g)
+    generadores.add(g)"""
 
     """g = Generador([350, 75], mg, [1, 1], despg=0)
     g.limite=limite
@@ -186,7 +186,6 @@ if __name__ == "__main__":
                 enemigos.add(e)
 
                 e.bloques = bloques
-                #e.generadores = generadores
                 e.personajes = personajes
     
         #Movimiento en mapa hacia la derecha
@@ -216,7 +215,7 @@ if __name__ == "__main__":
         bloques.update()
         generadores.update()
         enemigos.update()
-
+        
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
         infoTime = "Tiempo: " + str(tiempo)
@@ -237,6 +236,7 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
+        
 
         pygame.display.flip()
         reloj.tick(20)
