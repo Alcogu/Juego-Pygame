@@ -203,8 +203,6 @@ if __name__ == "__main__":
         else:
             f.f_vy = 0
 
-        
-
         for b in bloques:
             b.velx = f.f_vx   
             b.vely = f.f_vy
@@ -224,11 +222,16 @@ if __name__ == "__main__":
         infoTime = "Tiempo: " + str(tiempo)
         texto = fuente.render(infoTime, False, blanco)
 
+        #Salud del personaje
+        infoSalud = "Salud: " +str(p.salud)
+        textoSalud = fuente.render(infoSalud, False, blanco)
+
         #Se dibuja en pantalla
         pantallaprincipal.fill(negro)
         pantallaprincipal.blit(pantalla, (0,30))
         pantalla.blit(imgFondo,[f.f_x, f.f_y])
         pantallaprincipal.blit(texto, [2, 2])
+        pantallaprincipal.blit(textoSalud, [500, 2])
         
         personajes.draw(pantalla)
         bloques.draw(pantalla)

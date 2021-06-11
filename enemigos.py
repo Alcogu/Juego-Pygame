@@ -24,8 +24,9 @@ class Enemigos(pygame.sprite.Sprite):
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
-        self.disparar = False
+        self.salud = 1
         self.temp = 10
+        self.hit=pygame.mixer.Sound('music and songs/hit.wav')
 
     def update(self):
 
@@ -38,46 +39,28 @@ class Enemigos(pygame.sprite.Sprite):
                 self.col=self.anm_ini
 
         self.rect.x += self.velx
-        
+
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.velx > 0:
                 if self.rect.right > b.rect.left:
                     self.rect.right = b.rect.left
+                    self.dir = despe = 1
             else:
                 if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
+                    self.dir = despe = 2
             self.velx=5
 
         if self.rect.left < 0:
             self.rect.left = 0
+            self.dir = despe = 1
             self.velx = 5
-            self.bloques.velx = 0
 
         if self.rect.right > ancho:
             self.rect.right = ancho
+            self.dir = despe = 1
             self.velx = -5
-            self.bloques.velx = 0
-
-        col = pygame.sprite.spritecollide(self, self.generadores, False)
-        for g in col: 
-            if self.velx > 0:
-                if self.rect.right > g.rect.left:
-                    self.rect.right = g.rect.left
-            else:
-                if self.rect.left < g.rect.right:
-                    self.rect.left = g.rect.right
-            self.velx=5
-
-        if self.rect.left < 0:
-            self.rect.left = 0
-            self.velx = 5
-            self.generadores.velx = 0
-
-        if self.rect.right > ancho:
-            self.rect.right = ancho
-            self.velx = -5
-            self.generadores.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col: 
@@ -92,12 +75,10 @@ class Enemigos(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
             self.velx = 5
-            self.generadores.velx = 0
 
         if self.rect.right > ancho:
             self.rect.right = ancho
             self.velx = -5
-            self.personajes.velx = 0
 
         self.rect.y += self.vely
         
@@ -116,25 +97,6 @@ class Enemigos(pygame.sprite.Sprite):
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.bloques.vely = 0
-        
-        col = pygame.sprite.spritecollide(self, self.generadores, False)
-
-        for g in col: 
-            if self.vely > 0:
-                if self.rect.bottom > g.rect.top:
-                    self.rect.bottom = g.rect.top
-            else:
-                if self.rect.top < g.rect.bottom:
-                    self.rect.top = g.rect.bottom
-            self.vely=0
-
-        if self.rect.top < 0:
-            self.rect.top = 0
-
-        if self.rect.bottom > alto:
-            self.rect.bottom = alto
-            self.bloques.vely = 0
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col: 
@@ -151,4 +113,3 @@ class Enemigos(pygame.sprite.Sprite):
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.personajes.vely = 0

@@ -19,10 +19,11 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.y = 20
         self.velx = 0
         self.vely = 0
-        self.salud = 100
+        self.salud = 3
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
         self.enemigos = pygame.sprite.Group()
+        self.morir=pygame.mixer.Sound('music and songs/muerte.wav')
 
     def update(self):
         if self.velx != self.vely:
@@ -50,7 +51,6 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.right > ancho:
             self.rect.right = ancho
-            self.bloques.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.generadores, False)
         for g in col: 
@@ -67,7 +67,6 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.right > ancho:
             self.rect.right = ancho
-            self.generadores.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col: 
@@ -84,7 +83,6 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.right > ancho:
             self.rect.right = ancho
-            self.enemigos.velx = 0
 
         self.rect.y += self.vely
         
@@ -103,7 +101,6 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.bloques.vely = 0
         
         col = pygame.sprite.spritecollide(self, self.generadores, False)
 
@@ -121,7 +118,6 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.bloques.vely = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col: 
@@ -138,4 +134,3 @@ class Personaje(pygame.sprite.Sprite):
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.bloques.vely = 0
