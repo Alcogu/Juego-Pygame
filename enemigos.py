@@ -20,7 +20,6 @@ class Enemigos(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = -5
         self.vely = 0
-        self.salud = 100
         self.bloques = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
         self.temp = 10
@@ -62,7 +61,7 @@ class Enemigos(pygame.sprite.Sprite):
                     self.rect.left = p.rect.right
                     self.dir = self.despe = 2
                     self.velx = 5
-            #self.personaje.salud -= 1
+            p.salud -= 1
 
         if self.rect.left < 0:
             self.rect.left = 0
@@ -101,6 +100,7 @@ class Enemigos(pygame.sprite.Sprite):
                     self.rect.top = p.rect.bottom
                     self.dir = self.despe = 0
                     self.vely = 5
+            p.salud -= 1
 
         if self.rect.top < 0:
             self.rect.top = 0

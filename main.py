@@ -15,7 +15,6 @@ if __name__ == "__main__":
     pantalla = pygame.Surface((ancho, alto-30))
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
-    limite = 10
 
     #Música de fondo
     pygame.mixer.music.load('sounds/mdf.wav')
@@ -47,6 +46,7 @@ if __name__ == "__main__":
     
     #Generador
     g = Generador([350, 75], mg, [1, 1], despg=0)
+    limite = 2
     g.limite=limite
     generadores.add(g)
 
@@ -146,7 +146,6 @@ if __name__ == "__main__":
     p.generadores = generadores
     p.enemigos = enemigos
     
-    #col=0
     reloj=pygame.time.Clock()
 
     while True:
@@ -180,14 +179,16 @@ if __name__ == "__main__":
                     p.vely = 0
                     p.dir = desp + 1
 
-        for enem in generadores:
-            if enem.crear and (enem.limite > len(enemigos)):
-                e = Enemigos((enem.RetPos()), me, despe = 1)
+        for g in generadores:
+            if g.crear and (g.limite > len(enemigos)):
+                e = Enemigos((g.RetPos()), me, despe = 1)
                 enemigos.add(e)
+                g.crear = False
+                g.temp = 100
 
                 e.bloques = bloques
                 e.personajes = personajes
-    
+                
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
             p.rect.right = f.lim_d

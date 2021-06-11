@@ -44,7 +44,7 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
-            self.velx=0
+            self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.generadores, False)
         for g in col: 
@@ -54,11 +54,17 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.left < g.rect.right:
                     self.rect.left = g.rect.right
-            self.velx=0
+            self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
-        for e in col: 
-            self.salud -= 1
+        for e in col:
+            if self.velx > 0:
+                if self.rect.right > e.rect.left:
+                    self.rect.right = e.rect.left
+            else:
+                if self.rect.left < e.rect.right:
+                    self.rect.left = e.rect.right
+            self.velx = 0
 
         if self.rect.left < 0:
             self.rect.left = 0
