@@ -20,10 +20,11 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.y = 20
         self.velx = 0
         self.vely = 0
-        self.salud = 3
+        self.salud = 1
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
         self.enemigos = pygame.sprite.Group()
+        self.morir = pygame.mixer.Sound('sounds/muerte.wav')
 
     def update(self):
         if self.velx != self.vely:

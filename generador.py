@@ -22,7 +22,6 @@ class Generador(pygame.sprite.Sprite):
         self.vely = 0
         self.temp = 5
         self.crear = False
-        self.limite = 2
 
     def RetPos(self):
         px = self.rect.left - 10
@@ -34,6 +33,6 @@ class Generador(pygame.sprite.Sprite):
         self.rect.x += self.velx
         self.rect.y += self.vely
         
-        self.temp-=1
+        self.temp -= 1
         if self.temp <= 0:
             self.crear=True

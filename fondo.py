@@ -1,4 +1,5 @@
 import pygame
+
 from constantes import *
 
 class Fondo(pygame.sprite.Sprite):

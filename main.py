@@ -8,6 +8,7 @@ from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
+from menu import Menu
 from constantes import *
 
 if __name__ == "__main__":
@@ -17,15 +18,18 @@ if __name__ == "__main__":
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
 
+    #Limite de enemigos enerados
+    limite = 4
+
     #Música de fondo
-    pygame.mixer.music.load('sounds/mdf.wav')
+    musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
     #Primer valor para que la cancion no debe de sonar y segundo punto de inicio de la cancion
-    pygame.mixer.music.play(-1, 0.0)
+    musicaFondo.play()
     #La canción va bajando volumen a medida que se va terminando
     
     #grupos
-    fondos=pygame.sprite.Group()
-    personajes=pygame.sprite.Group()
+    fondos = pygame.sprite.Group()
+    personajes = pygame.sprite.Group()
     bloques = pygame.sprite.Group()
     generadores = pygame.sprite.Group()
     enemigos = pygame.sprite.Group()
@@ -36,6 +40,9 @@ if __name__ == "__main__":
     imgBloque = pygame.image.load('imagenes/bloques.png').convert_alpha()
     imgGenerador = pygame.image.load('imagenes/fosa.png').convert_alpha()
     imgEnemigo = pygame.image.load('imagenes/dogs.png').convert_alpha()
+    imgGameOver = pygame.image.load('imagenes/gameover.jpg').convert_alpha()
+
+    menu = Menu
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -47,21 +54,20 @@ if __name__ == "__main__":
     
     #Generador
     g = Generador([350, 75], mg, [1, 1], despg=0)
-    limite = 2
     g.limite = limite
     generadores.add(g)
 
-    """g = Generador([350, 1100], mg, [1, 1], despg=0)
-    g.limite=limite
-    generadores.add(g)"""
-
-    """g = Generador([350, 75], mg, [1, 1], despg=0)
+    g = Generador([350, 1100], mg, [1, 1], despg=0)
     g.limite=limite
     generadores.add(g)
 
-    g = Generador([350, 75], mg, [1, 1], despg=0)
+    g = Generador([1600, 75], mg, [1, 1], despg=0)
     g.limite=limite
-    generadores.add(g)"""
+    generadores.add(g)
+
+    g = Generador([1600, 1100], mg, [1, 1], despg=0)
+    g.limite=limite
+    generadores.add(g)
 
     #Recorte imagen del PJ
     sp_ancho = 12
@@ -147,8 +153,10 @@ if __name__ == "__main__":
     p.generadores = generadores
     p.enemigos = enemigos
     
-    reloj=pygame.time.Clock()
-
+    reloj = pygame.time.Clock()
+    ganar = False
+    perder = False
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -186,8 +194,8 @@ if __name__ == "__main__":
                 enemigos.add(e)
                 g.crear = False
                 g.temp = 100
-                e.velx = (random.randint(-5, 5))
-                e.vely = (random.randint(-5, 5))
+                e.velx = (random.randrange(-5, 5))
+                e.vely = (random.randrange(-5, 5))
 
                 e.bloques = bloques
                 e.personajes = personajes
@@ -213,6 +221,14 @@ if __name__ == "__main__":
         for g in generadores:
             g.velx = f.f_vx   
             g.vely = f.f_vy
+
+        #Condición para fin de juego por salud
+        for p in personajes:
+            if p.salud <= 0:
+                personajes.remove(p)
+                perder = True
+        if perder:
+            break
             
         #Actualizaciones
         personajes.update()
@@ -228,6 +244,10 @@ if __name__ == "__main__":
         #Salud del personaje
         infoSalud = "Salud: " +str(p.salud)
         textoSalud = fuente.render(infoSalud, False, blanco)
+
+        #Saludo
+        wellcome = "Bienvenido"
+        textowellcome = fuente.render(infoSalud, False, blanco)
 
         #Se dibuja en pantalla
         pantallaprincipal.fill(negro)
@@ -251,3 +271,19 @@ if __name__ == "__main__":
         #Desplazamiento de la pantalla en la imagen de fondo a abajo
         if f.f_y > f.f_limy:
             f.f_y += f.f_vy
+
+        #Mensaje fin del juego
+    if perder:
+        pygame.mixer.pause()
+        #p.morir.play()
+        pantallaprincipal.fill(negro)
+        pantallaprincipal.blit(imgGameOver, [-60, -60])
+        pygame.display.flip()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+
+        
+
+    
