@@ -6,12 +6,12 @@ class Personaje(pygame.sprite.Sprite):
 
     def __init__(self, m, lim_anim = [0,2], desp = 0):
         pygame.sprite.Sprite.__init__(self)
-        self.m=m
-        self.anm_ini=lim_anim[0]
-        self.anm_fin=lim_anim[1]
+        self.m = m
+        self.anm_ini = lim_anim[0]
+        self.anm_fin = lim_anim[1]
 
-        self.col=self.anm_ini
-        self.dir=desp
+        self.col = self.anm_ini
+        self.dir = desp
 
         self.image = self.m[self.dir][self.col]
         self.rect = self.image.get_rect()
@@ -30,9 +30,9 @@ class Personaje(pygame.sprite.Sprite):
             self.image = self.m[self.dir][self.col]
 
             if self.col < self.anm_fin:
-                self.col+=1
+                self.col += 1
             else:
-                self.col=self.anm_ini
+                self.col = self.anm_ini
 
         self.rect.x += self.velx
             
@@ -82,7 +82,7 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
-            self.vely=0
+            self.vely = 0
         
         col = pygame.sprite.spritecollide(self, self.generadores, False)
 
@@ -93,7 +93,7 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.top < g.rect.bottom:
                     self.rect.top = g.rect.bottom
-            self.vely=0
+            self.vely = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col: 

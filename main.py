@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 from personaje import Personaje
 from matriz import recorte
@@ -11,8 +12,8 @@ from constantes import *
 
 if __name__ == "__main__":
     pygame.init()
-    pantallaprincipal = pygame.display.set_mode([ancho, alto])
-    pantalla = pygame.Surface((ancho, alto-30))
+    pantallaprincipal = pygame.display.set_mode([ancho, alto + 30])
+    pantalla = pygame.Surface((ancho, alto))
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
 
@@ -36,18 +37,18 @@ if __name__ == "__main__":
     imgGenerador = pygame.image.load('imagenes/fosa.png').convert_alpha()
     imgEnemigo = pygame.image.load('imagenes/dogs.png').convert_alpha()
 
-    f=Fondo(imgFondo)
+    f = Fondo(imgFondo)
     fondos.add(f)
 
     #recorte generador
-    gen_ancho=4
-    gen_alto=5
+    gen_ancho = 4
+    gen_alto = 5
     mg = recorte(gen_ancho, gen_alto, imgGenerador)
     
     #Generador
     g = Generador([350, 75], mg, [1, 1], despg=0)
     limite = 2
-    g.limite=limite
+    g.limite = limite
     generadores.add(g)
 
     """g = Generador([350, 1100], mg, [1, 1], despg=0)
@@ -63,83 +64,83 @@ if __name__ == "__main__":
     generadores.add(g)"""
 
     #Recorte imagen del PJ
-    sp_ancho=12
-    sp_alto=8
+    sp_ancho = 12
+    sp_alto = 8
     m = recorte(sp_ancho, sp_alto, imgPersonaje)
 
     #Eleccion del pj y sus movimientos
-    desp=0
+    desp = 0
     p = Personaje(m, [3, 5], desp)
     personajes.add(p)
 
     #Recorte imagen de Enemigos
-    en_ancho=3
-    en_alto=4
+    en_ancho = 3
+    en_alto = 4
     me = recorte(en_ancho, en_alto, imgEnemigo)
 
     #Recorte de la imagen para los bloques
-    bl_ancho=2
-    bl_alto=12
-    mb=recorte(bl_ancho, bl_alto, imgBloque)
+    bl_ancho = 2
+    bl_alto = 12
+    mb = recorte(bl_ancho, bl_alto, imgBloque)
 
-    b=Bloques([100, 120], mb, [0, 0], despb=0)
+    b = Bloques([100, 120], mb, [0, 0], despb=0)
     bloques.add(b)
 
-    b=Bloques([210, 210], mb, [1, 1], despb=3)
+    b = Bloques([210, 210], mb, [1, 1], despb=3)
     bloques.add(b)
 
-    b=Bloques([645, 10], mb, [1, 1], despb=6)
+    b = Bloques([645, 10], mb, [1, 1], despb=6)
     bloques.add(b)
 
-    b=Bloques([1200, 340], mb, [1, 1], despb=9)
+    b = Bloques([1200, 340], mb, [1, 1], despb=9)
     bloques.add(b)
 
-    b=Bloques([1600, 332], mb, [1, 1], despb=0)
+    b = Bloques([1600, 332], mb, [1, 1], despb=0)
     bloques.add(b)
 
-    b=Bloques([1850, 85], mb, [1, 1], despb=3)
+    b = Bloques([1850, 85], mb, [1, 1], despb=3)
     bloques.add(b)
     
-    b=Bloques([140, 510], mb, [0, 0], despb=6)
+    b = Bloques([140, 510], mb, [0, 0], despb=6)
     bloques.add(b)
 
-    b=Bloques([400, 786], mb, [1, 1], despb=9)
+    b = Bloques([400, 786], mb, [1, 1], despb=9)
     bloques.add(b)
 
-    b=Bloques([679, 499], mb, [1, 1], despb=0)
+    b = Bloques([679, 499], mb, [1, 1], despb=0)
     bloques.add(b)
 
-    b=Bloques([899, 601], mb, [1, 1], despb=3)
+    b = Bloques([899, 601], mb, [1, 1], despb=3)
     bloques.add(b)
 
-    b=Bloques([1100, 807], mb, [1, 1], despb=6)
+    b = Bloques([1100, 807], mb, [1, 1], despb=6)
     bloques.add(b)
 
-    b=Bloques([1596, 510], mb, [1, 1], despb=9)
+    b = Bloques([1596, 510], mb, [1, 1], despb=9)
     bloques.add(b)
 
-    b=Bloques([1763, 499], mb, [1, 1], despb=0)
+    b = Bloques([1763, 499], mb, [1, 1], despb=0)
     bloques.add(b)
 
-    b=Bloques([350, 998], mb, [1, 1], despb=3)
+    b = Bloques([350, 998], mb, [1, 1], despb=3)
     bloques.add(b)
 
-    b=Bloques([570, 1150], mb, [1, 1], despb=6)
+    b = Bloques([570, 1150], mb, [1, 1], despb=6)
     bloques.add(b)
 
-    b=Bloques([759, 1000], mb, [1, 1], despb=9)
+    b = Bloques([759, 1000], mb, [1, 1], despb=9)
     bloques.add(b)
 
-    b=Bloques([1090, 890], mb, [1, 1], despb=0)
+    b = Bloques([1090, 890], mb, [1, 1], despb=0)
     bloques.add(b)
 
-    b=Bloques([1350, 915], mb, [1, 1], despb=3)
+    b = Bloques([1350, 915], mb, [1, 1], despb=3)
     bloques.add(b)
 
-    b=Bloques([1610, 1130], mb, [1, 1], despb=6)
+    b = Bloques([1610, 1130], mb, [1, 1], despb=6)
     bloques.add(b)
 
-    b=Bloques([1850, 1199], mb, [1, 1], despb=9)
+    b = Bloques([1850, 1199], mb, [1, 1], despb=9)
     bloques.add(b)
 
     p.bloques = bloques
@@ -185,6 +186,8 @@ if __name__ == "__main__":
                 enemigos.add(e)
                 g.crear = False
                 g.temp = 100
+                e.velx = (random.randint(-5, 5))
+                e.vely = (random.randint(-5, 5))
 
                 e.bloques = bloques
                 e.personajes = personajes
@@ -228,8 +231,8 @@ if __name__ == "__main__":
 
         #Se dibuja en pantalla
         pantallaprincipal.fill(negro)
-        pantallaprincipal.blit(pantalla, (0,30))
-        pantalla.blit(imgFondo,[f.f_x, f.f_y])
+        pantallaprincipal.blit(pantalla, (0, 30))
+        pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantallaprincipal.blit(texto, [2, 2])
         pantallaprincipal.blit(textoSalud, [500, 2])
         
@@ -238,14 +241,13 @@ if __name__ == "__main__":
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
         
-
         pygame.display.flip()
         reloj.tick(20)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:
-            f.f_x+=f.f_vx
+            f.f_x += f.f_vx
 
         #Desplazamiento de la pantalla en la imagen de fondo a abajo
         if f.f_y > f.f_limy:
-            f.f_y+=f.f_vy
+            f.f_y += f.f_vy

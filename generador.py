@@ -6,12 +6,12 @@ class Generador(pygame.sprite.Sprite):
 
     def __init__(self, pos, mg, lim_anim=[0,2], despg=0):
         pygame.sprite.Sprite.__init__(self)
-        self.mg=mg
-        self.anm_ini=lim_anim[0]
-        self.anm_fin=lim_anim[1]
+        self.mg = mg
+        self.anm_ini = lim_anim[0]
+        self.anm_fin =lim_anim[1]
 
-        self.col=self.anm_ini
-        self.dir=despg
+        self.col = self.anm_ini
+        self.dir = despg
 
         self.image = self.mg[self.dir][self.col]
         self.rect = self.image.get_rect()

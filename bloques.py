@@ -2,11 +2,11 @@ import pygame
 
 class Bloques(pygame.sprite.Sprite):
 
-    def __init__(self, pos, mb, lim_anim=[0,2], despb=0):
+    def __init__(self, pos, mb, lim_anim = [0,2], despb=0):
         pygame.sprite.Sprite.__init__(self)
-        self.mb=mb
-        self.anm_ini=lim_anim[0]
-        self.anm_fin=lim_anim[1]
+        self.mb = mb
+        self.anm_ini = lim_anim[0]
+        self.anm_fin = lim_anim[1]
 
         self.col=self.anm_ini
         self.dir=despb
