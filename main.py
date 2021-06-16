@@ -8,7 +8,7 @@ from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
-from menu import Menu
+from modificadores import Modificadores
 from constantes import *
 
 if __name__ == "__main__":
@@ -18,14 +18,11 @@ if __name__ == "__main__":
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
 
-    #Limite de enemigos enerados
-    limite = 4
+    limiteEnemigos = 4
+    limiteGeneradores = 3
 
-    #Música de fondo
     musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
-    #Primer valor para que la cancion no debe de sonar y segundo punto de inicio de la cancion
     musicaFondo.play()
-    #La canción va bajando volumen a medida que se va terminando
     
     #grupos
     fondos = pygame.sprite.Group()
@@ -33,6 +30,7 @@ if __name__ == "__main__":
     bloques = pygame.sprite.Group()
     generadores = pygame.sprite.Group()
     enemigos = pygame.sprite.Group()
+    modificadores = pygame.sprite.Group()
 
     #Imagenes
     imgFondo = pygame.image.load('imagenes/fondoprado2.jpg').convert_alpha()
@@ -41,11 +39,43 @@ if __name__ == "__main__":
     imgGenerador = pygame.image.load('imagenes/fosa.png').convert_alpha()
     imgEnemigo = pygame.image.load('imagenes/dogs.png').convert_alpha()
     imgGameOver = pygame.image.load('imagenes/gameover.jpg').convert_alpha()
-
-    menu = Menu
+    imgItems = pygame.image.load('imagenes/items.png').convert_alpha()
 
     f = Fondo(imgFondo)
     fondos.add(f)
+
+    #recorte items
+    items_ancho = 16
+    items_alto = 4
+    mi = recorte(items_ancho, items_alto, imgItems)
+
+    """posRandomX = (random.randint(0, 1920))
+    posRandomY = (random.randint(0, 1281))"""
+
+    posRandomX = (random.randint(0, 600))
+    posRandomY = (random.randint(0, 400))
+
+    posRandomX1 = (random.randint(0, 1920))
+    posRandomY1 = (random.randint(0, 1281))
+
+    posRandomX2 = (random.randint(0, 1920))
+    posRandomY2 = (random.randint(0, 1281))
+
+    posRandomX3 = (random.randint(0, 1920))
+    posRandomY3 = (random.randint(0, 1281))
+
+    #Modificador Salud
+    m = Modificadores([posRandomX, posRandomY], mi, [11, 1], despm = 0)
+    modificadores.add(m)
+
+    m = Modificadores([posRandomX1, posRandomY1], mi, [11, 1], despm = 0)
+    modificadores.add(m)
+
+    m = Modificadores([posRandomX2, posRandomY2], mi, [11, 1], despm = 0)
+    modificadores.add(m)
+
+    m = Modificadores([posRandomX3, posRandomY3], mi, [11, 1], despm = 0)
+    modificadores.add(m)
 
     #recorte generador
     gen_ancho = 4
@@ -54,10 +84,10 @@ if __name__ == "__main__":
     
     #Generador
     g = Generador([350, 75], mg, [1, 1], despg=0)
-    g.limite = limite
+    g.limiteEnemigos = limiteEnemigos
     generadores.add(g)
 
-    g = Generador([350, 1100], mg, [1, 1], despg=0)
+    """g = Generador([350, 1100], mg, [1, 1], despg=0)
     g.limite=limite
     generadores.add(g)
 
@@ -67,7 +97,7 @@ if __name__ == "__main__":
 
     g = Generador([1600, 1100], mg, [1, 1], despg=0)
     g.limite=limite
-    generadores.add(g)
+    generadores.add(g)"""
 
     #Recorte imagen del PJ
     sp_ancho = 12
@@ -152,6 +182,7 @@ if __name__ == "__main__":
     p.bloques = bloques
     p.generadores = generadores
     p.enemigos = enemigos
+    p.modificadores = modificadores
     
     reloj = pygame.time.Clock()
     ganar = False
@@ -189,7 +220,7 @@ if __name__ == "__main__":
                     p.dir = desp + 1
 
         for g in generadores:
-            if g.crear and (g.limite > len(enemigos)):
+            if g.crear and (g.limiteEnemigos > len(enemigos)):
                 e = Enemigos((g.RetPos()), me, despe = 1)
                 enemigos.add(e)
                 g.crear = False
@@ -235,6 +266,7 @@ if __name__ == "__main__":
         bloques.update()
         generadores.update()
         enemigos.update()
+        modificadores.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -260,6 +292,7 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
+        modificadores.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(20)
@@ -283,7 +316,3 @@ if __name__ == "__main__":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-
-        
-
-    
