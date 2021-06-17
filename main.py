@@ -3,18 +3,18 @@ import sys
 import random
 
 from personaje import Personaje
-from matriz import recorte
+from funciones import *
 from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
 from modificadores import Modificadores
+from imagenes import *
 from constantes import *
 
 if __name__ == "__main__":
     pygame.init()
-    pantallaprincipal = pygame.display.set_mode([ancho, alto + 30])
-    pantalla = pygame.Surface((ancho, alto))
+    pantalla = pygame.display.set_mode([ancho, alto])
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
 
@@ -32,37 +32,29 @@ if __name__ == "__main__":
     enemigos = pygame.sprite.Group()
     modificadores = pygame.sprite.Group()
 
-    #Imagenes
-    imgFondo = pygame.image.load('imagenes/fondoprado2.jpg').convert_alpha()
-    imgPersonaje = pygame.image.load('imagenes/centauros.png').convert_alpha()
-    imgBloque = pygame.image.load('imagenes/bloques.png').convert_alpha()
-    imgGenerador = pygame.image.load('imagenes/fosa.png').convert_alpha()
-    imgEnemigo = pygame.image.load('imagenes/dogs.png').convert_alpha()
-    imgGameOver = pygame.image.load('imagenes/gameover.jpg').convert_alpha()
-    imgItems = pygame.image.load('imagenes/items.png').convert_alpha()
-
     f = Fondo(imgFondo)
     fondos.add(f)
+
+    #Ciclo presentacion
+    seguir = False
+
+    while True and not seguir:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                seguir = True
+
+        texto = fuente.render("¡¡¡Bienvenido!!! ", True, blanco)
+        texto2 = fuente.render("Preciona una tecla para jugar", True, blanco)
+        pantalla.blit(texto, [100,100])
+        pantalla.blit(texto2, [100,200])
+        pygame.display.flip()
 
     #recorte items
     items_ancho = 16
     items_alto = 4
     mi = recorte(items_ancho, items_alto, imgItems)
-
-    """posRandomX = (random.randint(0, 1920))
-    posRandomY = (random.randint(0, 1281))"""
-
-    posRandomX = (random.randint(0, 600))
-    posRandomY = (random.randint(0, 400))
-
-    posRandomX1 = (random.randint(0, 1920))
-    posRandomY1 = (random.randint(0, 1281))
-
-    posRandomX2 = (random.randint(0, 1920))
-    posRandomY2 = (random.randint(0, 1281))
-
-    posRandomX3 = (random.randint(0, 1920))
-    posRandomY3 = (random.randint(0, 1281))
 
     #Modificador Salud
     m = Modificadores([posRandomX, posRandomY], mi, [11, 1], despm = 0)
@@ -83,7 +75,7 @@ if __name__ == "__main__":
     mg = recorte(gen_ancho, gen_alto, imgGenerador)
     
     #Generador
-    g = Generador([350, 75], mg, [1, 1], despg=0)
+    g = Generador([350, 90], mg, [1, 1], despg=0)
     g.limiteEnemigos = limiteEnemigos
     generadores.add(g)
 
@@ -219,6 +211,7 @@ if __name__ == "__main__":
                     p.vely = 0
                     p.dir = desp + 1
 
+        #Generador de perros esqueletos
         for g in generadores:
             if g.crear and (g.limiteEnemigos > len(enemigos)):
                 e = Enemigos((g.RetPos()), me, despe = 1)
@@ -230,6 +223,8 @@ if __name__ == "__main__":
 
                 e.bloques = bloques
                 e.personajes = personajes
+
+        
                 
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
@@ -274,20 +269,16 @@ if __name__ == "__main__":
         texto = fuente.render(infoTime, False, blanco)
 
         #Salud del personaje
-        infoSalud = "Salud: " +str(p.salud)
+        infoSalud = "Salud: "
         textoSalud = fuente.render(infoSalud, False, blanco)
 
-        #Saludo
-        wellcome = "Bienvenido"
-        textowellcome = fuente.render(infoSalud, False, blanco)
-
-        #Se dibuja en pantalla
-        pantallaprincipal.fill(negro)
-        pantallaprincipal.blit(pantalla, (0, 30))
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
-        pantallaprincipal.blit(texto, [2, 2])
-        pantallaprincipal.blit(textoSalud, [500, 2])
-        
+        pantalla.blit(textoSalud, [2, 2])
+        pantalla.blit(texto, [500, 2])
+        #Aumento de corazones por generador
+        for s in range(p.salud):
+            espacio = 15 * s
+            Corazon(pantalla, [90 + espacio, 10], rojo)
         personajes.draw(pantalla)
         bloques.draw(pantalla)
         generadores.draw(pantalla)
@@ -309,8 +300,8 @@ if __name__ == "__main__":
     if perder:
         pygame.mixer.pause()
         #p.morir.play()
-        pantallaprincipal.fill(negro)
-        pantallaprincipal.blit(imgGameOver, [-60, -60])
+        pantalla.fill(negro)
+        pantalla.blit(imgGameOver, [-60, -60])
         pygame.display.flip()
         while True:
             for event in pygame.event.get():

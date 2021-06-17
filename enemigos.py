@@ -20,6 +20,7 @@ class Enemigos(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
+        self.limitesuperior = 20
         self.bloques = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
 
@@ -132,8 +133,8 @@ class Enemigos(pygame.sprite.Sprite):
 
         #Cambio de sprite y sentido del movimiento en el eje Y después de la colición
         #con el limite superior de la pantalla
-        if self.rect.top < 0:
-            self.rect.top = 0
+        if self.rect.top < self.limitesuperior:
+            self.rect.top = self.limitesuperior
             self.dir = self.despe = 0
             self.vely = 5
 
