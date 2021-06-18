@@ -3,12 +3,14 @@ import sys
 import random
 
 from personaje import Personaje
-from funciones import *
 from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
 from modificadores import Modificadores
+from indicadores import Indicadores
+from funciones import recorte
+from funciones import corazon
 from imagenes import *
 from constantes import *
 
@@ -17,9 +19,6 @@ if __name__ == "__main__":
     pantalla = pygame.display.set_mode([ancho, alto])
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
-
-    limiteEnemigos = 4
-    limiteGeneradores = 3
 
     musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
     musicaFondo.play()
@@ -31,6 +30,7 @@ if __name__ == "__main__":
     generadores = pygame.sprite.Group()
     enemigos = pygame.sprite.Group()
     modificadores = pygame.sprite.Group()
+    indicadores = pygame.sprite.Group()
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -224,8 +224,6 @@ if __name__ == "__main__":
                 e.bloques = bloques
                 e.personajes = personajes
 
-        
-                
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
             p.rect.right = f.lim_d
@@ -262,6 +260,7 @@ if __name__ == "__main__":
         generadores.update()
         enemigos.update()
         modificadores.update()
+        indicadores.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -275,18 +274,23 @@ if __name__ == "__main__":
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantalla.blit(textoSalud, [2, 2])
         pantalla.blit(texto, [500, 2])
+
         #Aumento de corazones por generador
         for s in range(p.salud):
-            espacio = 15 * s
-            Corazon(pantalla, [90 + espacio, 10], rojo)
+            espacio = 30 * s
+            corazon(pantalla, [90 + espacio, 10], rojo)
+            #indi = Indicadores([80 + espacio, 3], mi, [11, 1], despi = 0)
+            #indicadores.add(indi)
+
         personajes.draw(pantalla)
         bloques.draw(pantalla)
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
         modificadores.draw(pantalla)
+        indicadores.draw(pantalla)
         
         pygame.display.flip()
-        reloj.tick(20)
+        reloj.tick(60)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:

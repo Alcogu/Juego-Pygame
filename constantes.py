@@ -9,7 +9,6 @@ negro = [0,0,0]
 verdeclaro = [61,174,87]
 
 #-------------------------------------------------------------------------
-
 #dimensiones de la pantalla
 ancho = 640
 alto = 420
@@ -37,6 +36,10 @@ posRandomX3 = (random.randint(0, 1920))
 posRandomY3 = (random.randint(0, 1281))
 
 #-------------------------------------------------------------------------
+
+#Limites objetos
+
+limiteEnemigos = 4
 
 """#Sonido al colicionar
     sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')

@@ -1,20 +1,16 @@
 import pygame
 
 from constantes import *
-from modificadores import Modificadores
 
-def Corazon(pantalla, pos, cl = blanco):
+#Generador de indice de modificadores
+def corazon(pantalla, pos, cl = rojo):
     pos1 = (pos[0]+10, pos[1])
     pos2 = (pos[0], pos[1]+10)
     ptos = (pos, pos1, pos2)
     pygame.draw.polygon(pantalla, cl, ptos)
-
-    #Indice salud
-    #IndiceSalud = Modificadores([0, 0], mi, [11, 1], despm = 0)
     
-
 #---------------------------------------------------------
-    
+#Recorte de matriz para las imagenes    
 def recorte(ancho, alto, im):
     #Toma tamaño y coordenadas de la imagen
     info = im.get_rect()
