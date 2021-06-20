@@ -22,10 +22,12 @@ class Personaje(pygame.sprite.Sprite):
         self.vely = 0
         self.salud = 5
         self.limitesuperior = 20
+
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
         self.enemigos = pygame.sprite.Group()
         self.modificadores = pygame.sprite.Group()
+        self.indicadores = pygame.sprite.Group()
         self.morir = pygame.mixer.Sound('sounds/muerte.wav')
 
     def update(self):

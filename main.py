@@ -101,6 +101,8 @@ if __name__ == "__main__":
     p = Personaje(m, [3, 5], desp)
     personajes.add(p)
 
+    cantCoras=p.salud
+
     #Recorte imagen de Enemigos
     en_ancho = 3
     en_alto = 4
@@ -175,7 +177,8 @@ if __name__ == "__main__":
     p.generadores = generadores
     p.enemigos = enemigos
     p.modificadores = modificadores
-    
+    p.indicadores = indicadores
+
     reloj = pygame.time.Clock()
     ganar = False
     perder = False
@@ -253,7 +256,7 @@ if __name__ == "__main__":
                 perder = True
         if perder:
             break
-            
+
         #Actualizaciones
         personajes.update()
         bloques.update()
@@ -290,7 +293,7 @@ if __name__ == "__main__":
         indicadores.draw(pantalla)
         
         pygame.display.flip()
-        reloj.tick(60)
+        reloj.tick(40)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:
@@ -303,7 +306,7 @@ if __name__ == "__main__":
         #Mensaje fin del juego
     if perder:
         pygame.mixer.pause()
-        #p.morir.play()
+        p.morir.play()
         pantalla.fill(negro)
         pantalla.blit(imgGameOver, [-60, -60])
         pygame.display.flip()

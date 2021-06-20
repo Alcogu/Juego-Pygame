@@ -18,5 +18,3 @@ class Indicadores(pygame.sprite.Sprite):
         
         self.rect.x = pos[0]
         self.rect.y = pos[1]
-        self.velx = 0
-        self.vely = 0
