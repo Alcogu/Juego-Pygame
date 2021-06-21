@@ -60,7 +60,6 @@ class Enemigos(pygame.sprite.Sprite):
             #Si hay desplazamiento en X
             if self.velx > 0:
                 #Si el lado derecho del enemigo coliciona con el lado izquierdo del bloque se detiene
-                if self.rect.right > b.rect.left:
                     self.rect.right = b.rect.left
                     #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 1
@@ -68,7 +67,6 @@ class Enemigos(pygame.sprite.Sprite):
                     self.velx = -5
             else:
                 #Si el lado izquierdo del enemigo coliciona con el lado derecho del bloque se detiene
-                if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
                     #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 2
@@ -80,7 +78,6 @@ class Enemigos(pygame.sprite.Sprite):
             #Si hay desplazamiento en X
             if self.velx > 0:
                 #Si el lado derecho del enemigo coliciona con el lado izquierdo del personaje se detiene
-                if self.rect.right > p.rect.left:
                     self.rect.right = p.rect.left
                     #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 1
@@ -88,7 +85,6 @@ class Enemigos(pygame.sprite.Sprite):
                     self.velx = -5
             else:
                 #Si el lado izquierdo del enemigo coliciona con el lado derecho del bloque se detiene
-                if self.rect.left < p.rect.right:
                     self.rect.left = p.rect.right
                     #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 2
@@ -119,14 +115,12 @@ class Enemigos(pygame.sprite.Sprite):
             if self.vely > 0:
                 #Se cambia de sprite y el enemigo se desplaza hacia arriba después de colicionar
                 #en el eje Y con el bloque
-                if self.rect.bottom > b.rect.top:
                     self.rect.bottom = b.rect.top
                     self.dir = self.despe = 3
                     self.vely = -5
             else:
                 #Se cambia de sprite y el enemigo se desplaza hacia abajo después de colicionar
                 #en el eje Y con el bloque
-                if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
                     self.dir = self.despe = 0
                     self.vely = 5
@@ -137,14 +131,12 @@ class Enemigos(pygame.sprite.Sprite):
             if self.vely > 0:
                 #Se cambia de sprite y el enemigo se desplaza hacia arriba después de colicionar
                 #en el eje Y con el personaje
-                if self.rect.bottom > p.rect.top:
                     self.rect.bottom = p.rect.top
                     self.dir = self.despe = 3
                     self.vely = -5
             else:
                 #Se cambia de sprite y el enemigo se desplaza hacia abajo después de colicionar
                 #en el eje Y con el personaje
-                if self.rect.top < p.rect.bottom:
                     self.rect.top = p.rect.bottom
                     self.dir = self.despe = 0
                     self.vely = 5

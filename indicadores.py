@@ -18,3 +18,4 @@ class Indicadores(pygame.sprite.Sprite):
         
         self.rect.x = pos[0]
         self.rect.y = pos[1]
+        

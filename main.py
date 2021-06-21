@@ -8,8 +8,10 @@ from generador import Generador
 from enemigos import Enemigos
 from modificadores import Modificadores
 from indicadores import Indicadores
+
 from funciones import recorte
 from funciones import corazon
+
 from imagenes import *
 from constantes import *
 
@@ -74,25 +76,14 @@ if __name__ == "__main__":
     mg = recorte(gen_ancho, gen_alto, imgGenerador)
     
     #Generador
-    ls_gen = [(350, 90), (500, 200), (100, 200)]
+    ls_gen = [(350, 90), (500, 200), (100, 200), 
+    #(350, 1100), (1600, 75), (1600, 1100)
+    ]
     con = 0
     for p in ls_gen:
         g = Generador(con, p, mg, [1, 1], despg=0)
         con += 1
-        g.limiteEnemigos = limiteEnemigos
         generadores.add(g)
-
-    """g = Generador([350, 1100], mg, [1, 1], despg=0)
-    g.limite=limite
-    generadores.add(g)
-
-    g = Generador([1600, 75], mg, [1, 1], despg=0)
-    g.limite=limite
-    generadores.add(g)
-
-    g = Generador([1600, 1100], mg, [1, 1], despg=0)
-    g.limite=limite
-    generadores.add(g)"""
 
     #Recorte imagen del PJ
     sp_ancho = 12
@@ -116,65 +107,33 @@ if __name__ == "__main__":
     bl_alto = 12
     mb = recorte(bl_ancho, bl_alto, imgBloque)
 
-    b = Bloques([100, 120], mb, [0, 0], despb=0)
-    bloques.add(b)
+    ls_bloques = ([100, 120], [1600, 332], [1090, 890], [679, 499], [1763, 499])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 0)
+        con += 1
+        bloques.add(b)
 
-    b = Bloques([210, 210], mb, [1, 1], despb=3)
-    bloques.add(b)
+    ls_bloques = ([210, 210], [1350, 915], [1850, 85], [899, 601], [350, 998])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 3)
+        con += 1
+        bloques.add(b)
 
-    b = Bloques([645, 10], mb, [1, 1], despb=6)
-    bloques.add(b)
+    ls_bloques = ([645, 10], [140, 510], [1100, 807], [570, 1150], [1610, 1130])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 6)
+        con += 1
+        bloques.add(b)
 
-    b = Bloques([1200, 340], mb, [1, 1], despb=9)
-    bloques.add(b)
-
-    b = Bloques([1600, 332], mb, [1, 1], despb=0)
-    bloques.add(b)
-
-    b = Bloques([1850, 85], mb, [1, 1], despb=3)
-    bloques.add(b)
-    
-    b = Bloques([140, 510], mb, [0, 0], despb=6)
-    bloques.add(b)
-
-    b = Bloques([400, 786], mb, [1, 1], despb=9)
-    bloques.add(b)
-
-    b = Bloques([679, 499], mb, [1, 1], despb=0)
-    bloques.add(b)
-
-    b = Bloques([899, 601], mb, [1, 1], despb=3)
-    bloques.add(b)
-
-    b = Bloques([1100, 807], mb, [1, 1], despb=6)
-    bloques.add(b)
-
-    b = Bloques([1596, 510], mb, [1, 1], despb=9)
-    bloques.add(b)
-
-    b = Bloques([1763, 499], mb, [1, 1], despb=0)
-    bloques.add(b)
-
-    b = Bloques([350, 998], mb, [1, 1], despb=3)
-    bloques.add(b)
-
-    b = Bloques([570, 1150], mb, [1, 1], despb=6)
-    bloques.add(b)
-
-    b = Bloques([759, 1000], mb, [1, 1], despb=9)
-    bloques.add(b)
-
-    b = Bloques([1090, 890], mb, [1, 1], despb=0)
-    bloques.add(b)
-
-    b = Bloques([1350, 915], mb, [1, 1], despb=3)
-    bloques.add(b)
-
-    b = Bloques([1610, 1130], mb, [1, 1], despb=6)
-    bloques.add(b)
-
-    b = Bloques([1850, 1199], mb, [1, 1], despb=9)
-    bloques.add(b)
+    ls_bloques = ([1200, 340], [400, 786], [1596, 510], [759, 1000], [1850, 1199])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 9)
+        con += 1
+        bloques.add(b)
 
     p.bloques = bloques
     p.generadores = generadores
@@ -219,14 +178,14 @@ if __name__ == "__main__":
 
         #Generador de perros esqueletos
         for g in generadores:
-            #if g.crear and (g.limiteEnemigos > len(enemigos)):
-            if g.pob < g.lim:
+            if g.crear and (g.pob < g.lim):
                 e = Enemigos((g.RetPos()), g.id, me, despe = 1)
                 e.CambiarDir()
                 enemigos.add(e)
-                #g.crear = False
+                g.temp = 100
+                g.crear = False
                 g.pob += 1
-
+                
                 e.bloques = bloques
                 e.personajes = personajes
 
@@ -266,7 +225,6 @@ if __name__ == "__main__":
         generadores.update()
         enemigos.update()
         modificadores.update()
-        indicadores.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -296,7 +254,7 @@ if __name__ == "__main__":
         indicadores.draw(pantalla)
         
         pygame.display.flip()
-        reloj.tick(40)
+        reloj.tick(30)
 
         #Desplazamiento de la pantalla en la imagen de fondo a la derecha
         if f.f_x > f.f_limx:

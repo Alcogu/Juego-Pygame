@@ -9,7 +9,7 @@ def corazon(pantalla, pos, cl = rojo):
     ptos = (pos, pos1, pos2)
     pygame.draw.polygon(pantalla, cl, ptos)
     
-#---------------------------------------------------------
+#---------------------------------------------------------------------------------
 #Recorte de matriz para las imagenes    
 def recorte(ancho, alto, im):
     #Toma tamaño y coordenadas de la imagen

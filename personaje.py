@@ -45,30 +45,24 @@ class Personaje(pygame.sprite.Sprite):
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.velx > 0:
-                if self.rect.right > b.rect.left:
                     self.rect.right = b.rect.left
             else:
-                if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
             self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.generadores, False)
         for g in col: 
             if self.velx > 0:
-                if self.rect.right > g.rect.left:
                     self.rect.right = g.rect.left
             else:
-                if self.rect.left < g.rect.right:
                     self.rect.left = g.rect.right
             self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col:
             if self.velx > 0:
-                if self.rect.right > e.rect.left:
                     self.rect.right = e.rect.left
             else:
-                if self.rect.left < e.rect.right:
                     self.rect.left = e.rect.right
             self.velx = 0
 
@@ -87,10 +81,8 @@ class Personaje(pygame.sprite.Sprite):
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.vely > 0:
-                if self.rect.bottom > b.rect.top:
                     self.rect.bottom = b.rect.top
             else:
-                if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
             self.vely = 0
         
@@ -98,20 +90,16 @@ class Personaje(pygame.sprite.Sprite):
 
         for g in col: 
             if self.vely > 0:
-                if self.rect.bottom > g.rect.top:
                     self.rect.bottom = g.rect.top
             else:
-                if self.rect.top < g.rect.bottom:
                     self.rect.top = g.rect.bottom
             self.vely = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col: 
             if self.vely > 0:
-                if self.rect.bottom > e.rect.top:
                     self.rect.bottom = e.rect.top
             else:
-                if self.rect.top < e.rect.bottom:
                     self.rect.top = e.rect.bottom
             self.vely=0
 

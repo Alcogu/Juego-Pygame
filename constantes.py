@@ -6,7 +6,6 @@ rojo = [245,15,15]
 verde = [47, 163, 41]
 blanco = [255,255,255]
 negro = [0,0,0]
-verdeclaro = [61,174,87]
 
 #-------------------------------------------------------------------------
 #dimensiones de la pantalla
@@ -20,9 +19,6 @@ altoIma = 1281
 #-------------------------------------------------------------------------
 #Posiciones aleatorias para los modificadores de vida
 
-"""posRandomX = (random.randint(0, 1920))
-    posRandomY = (random.randint(0, 1281))"""
-
 posRandomX = (random.randint(0, 600))
 posRandomY = (random.randint(0, 400))
 
@@ -34,13 +30,3 @@ posRandomY2 = (random.randint(0, 1281))
 
 posRandomX3 = (random.randint(0, 1920))
 posRandomY3 = (random.randint(0, 1281))
-
-#-------------------------------------------------------------------------
-
-#Limites objetos
-
-limiteEnemigos = 4
-
-"""#Sonido al colicionar
-    sound = pygame.mixer.Sound('Juego-Pygame/sounds/coin.wav')
-    sound.play()"""
