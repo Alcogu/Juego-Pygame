@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 
 from personaje import Personaje
 from bloques import Bloques
@@ -75,9 +74,13 @@ if __name__ == "__main__":
     mg = recorte(gen_ancho, gen_alto, imgGenerador)
     
     #Generador
-    g = Generador([350, 90], mg, [1, 1], despg=0)
-    g.limiteEnemigos = limiteEnemigos
-    generadores.add(g)
+    ls_gen = [(350, 90), (500, 200), (100, 200)]
+    con = 0
+    for p in ls_gen:
+        g = Generador(con, p, mg, [1, 1], despg=0)
+        con += 1
+        g.limiteEnemigos = limiteEnemigos
+        generadores.add(g)
 
     """g = Generador([350, 1100], mg, [1, 1], despg=0)
     g.limite=limite
@@ -216,13 +219,13 @@ if __name__ == "__main__":
 
         #Generador de perros esqueletos
         for g in generadores:
-            if g.crear and (g.limiteEnemigos > len(enemigos)):
-                e = Enemigos((g.RetPos()), me, despe = 1)
+            #if g.crear and (g.limiteEnemigos > len(enemigos)):
+            if g.pob < g.lim:
+                e = Enemigos((g.RetPos()), g.id, me, despe = 1)
+                e.CambiarDir()
                 enemigos.add(e)
-                g.crear = False
-                g.temp = 100
-                e.velx = (random.randrange(-5, 5))
-                e.vely = (random.randrange(-5, 5))
+                #g.crear = False
+                g.pob += 1
 
                 e.bloques = bloques
                 e.personajes = personajes

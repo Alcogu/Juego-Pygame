@@ -22,6 +22,7 @@ class Personaje(pygame.sprite.Sprite):
         self.vely = 0
         self.salud = 5
         self.limitesuperior = 20
+        self.aceleracion = 0
 
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()

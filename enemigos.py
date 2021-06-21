@@ -4,7 +4,7 @@ from constantes import *
 
 class Enemigos(pygame.sprite.Sprite):
 
-    def __init__(self, pos, me, lim_anim = [0,2], despe = 0):
+    def __init__(self, pos, idg, me, lim_anim = [0,2], despe = 0):
         pygame.sprite.Sprite.__init__(self)
         self.me = me
         self.anm_ini = lim_anim[0]
@@ -21,9 +21,27 @@ class Enemigos(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
         self.limitesuperior = 20
+        self.idgen = idg
+
         self.bloques = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
         self.indicadores = pygame.sprite.Group()
+
+    #Dirección de salida aleatoria
+    def CambiarDir(self):
+
+        eje = random.randrange(100)
+        sentido = random.randrange(100)
+        if eje > 50:
+            if sentido > 50:
+                self.vely = -5
+            else:
+                self.vely = 5
+        else:
+            if sentido > 50:
+                self.velx = -5
+            else:
+                self.velx = 5
 
     def update(self):
 
