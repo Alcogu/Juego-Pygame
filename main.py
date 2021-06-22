@@ -7,34 +7,17 @@ from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
 from modificadores import Modificadores
-from indicadores import Indicadores
-
-from funciones import recorte
 from funciones import corazon
 
 from imagenes import *
 from constantes import *
+from recortes import *
 
 if __name__ == "__main__":
     pygame.init()
     pantalla = pygame.display.set_mode([ancho, alto])
     pygame.display.set_caption("Video Juego")
     fuente = pygame.font.Font('freesansbold.ttf', 25)
-
-    musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
-    musicaFondo.play()
-    
-    #grupos
-    fondos = pygame.sprite.Group()
-    personajes = pygame.sprite.Group()
-    bloques = pygame.sprite.Group()
-    generadores = pygame.sprite.Group()
-    enemigos = pygame.sprite.Group()
-    modificadores = pygame.sprite.Group()
-    indicadores = pygame.sprite.Group()
-
-    f = Fondo(imgFondo)
-    fondos.add(f)
 
     #Ciclo presentacion
     presentacion = True
@@ -47,15 +30,25 @@ if __name__ == "__main__":
                 presentacion = False
 
         texto = fuente.render("¡¡¡Bienvenido!!! ", True, blanco)
-        texto2 = fuente.render("Preciona una tecla para jugar", True, blanco)
-        pantalla.blit(texto, [100,100])
-        pantalla.blit(texto2, [100,200])
+        texto2 = fuente.render("Oprime una tecla para empezar la aventura", True, blanco)
+        pantalla.blit(texto, [ancho//3,alto//3])
+        pantalla.blit(texto2, [50,alto//2])
         pygame.display.flip()
 
-    #recorte items
-    items_ancho = 16
-    items_alto = 4
-    mi = recorte(items_ancho, items_alto, imgItems)
+    #grupos
+    fondos = pygame.sprite.Group()
+    personajes = pygame.sprite.Group()
+    bloques = pygame.sprite.Group()
+    generadores = pygame.sprite.Group()
+    enemigos = pygame.sprite.Group()
+    modificadores = pygame.sprite.Group()
+    indicadores = pygame.sprite.Group()
+
+    f = Fondo(imgFondo)
+    fondos.add(f)
+
+    musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
+    musicaFondo.play()
 
     ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
                         [posRandomX2, posRandomY2], [posRandomX3, posRandomY3])
@@ -65,11 +58,6 @@ if __name__ == "__main__":
         con += 1
         modificadores.add(m)
 
-    #recorte generador
-    gen_ancho = 4
-    gen_alto = 5
-    mg = recorte(gen_ancho, gen_alto, imgGenerador)
-    
     #Generador
     ls_gen = [(350, 90), (500, 200), (100, 200), 
     #(350, 1100), (1600, 75), (1600, 1100)
@@ -80,27 +68,11 @@ if __name__ == "__main__":
         con += 1
         generadores.add(g)
 
-    #Recorte imagen del PJ
-    sp_ancho = 12
-    sp_alto = 8
-    m = recorte(sp_ancho, sp_alto, imgPersonaje)
-
     #Eleccion del pj y sus movimientos
     desp = 0
-    p = Personaje(m, [3, 5], desp)
+    p = Personaje(mp, [3, 5], desp)
     personajes.add(p)
 
-    cantCoras=p.salud
-
-    #Recorte imagen de Enemigos
-    en_ancho = 3
-    en_alto = 4
-    me = recorte(en_ancho, en_alto, imgEnemigo)
-
-    #Recorte de la imagen para los bloques
-    bl_ancho = 2
-    bl_alto = 12
-    mb = recorte(bl_ancho, bl_alto, imgBloque)
 
     ls_bloques = ([100, 120], [1600, 332], [1090, 890], [679, 499], [1763, 499])
     con = 0
@@ -205,6 +177,10 @@ if __name__ == "__main__":
             g.velx = f.f_vx   
             g.vely = f.f_vy
 
+        for m in modificadores:
+            m.velx = f.f_vx   
+            m.vely = f.f_vy
+
         #Condición para fin de juego por salud
         for p in personajes:
             if p.salud <= 0:
@@ -235,17 +211,14 @@ if __name__ == "__main__":
 
         #Aumento de corazones por generador
         for s in range(p.salud):
-            espacio = 30 * s
+            espacio = 20 * s
             corazon(pantalla, [90 + espacio, 10], rojo)
-            #indi = Indicadores([80 + espacio, 3], mi, [11, 1], despi = 0)
-            #indicadores.add(indi)
 
         personajes.draw(pantalla)
         bloques.draw(pantalla)
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
         modificadores.draw(pantalla)
-        indicadores.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)

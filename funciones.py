@@ -4,9 +4,18 @@ from constantes import *
 
 #Generador de indice de modificadores
 def corazon(pantalla, pos, cl = rojo):
-    pos1 = (pos[0]+10, pos[1])
-    pos2 = (pos[0], pos[1]+10)
-    ptos = (pos, pos1, pos2)
+    pos1 = (pos[0]-2, pos[1]+2)
+    pos2 = (pos[0], pos[1]+6)
+    pos3 = (pos[0]+2, pos[1]+8)
+    pos4 = (pos[0]+4, pos[1]+10)
+    pos5 = (pos[0]+6, pos[1]+8)
+    pos6 = (pos[0]+8, pos[1]+6)
+    pos7 = (pos[0]+10, pos[1]+2)
+    pos8 = (pos[0]+8, pos[1])
+    pos9 = (pos[0]+4, pos[1]+2)
+    pos10 = (pos[0]+4, pos[1]+4)
+    pos11 = (pos[0]+2, pos[1]+2)
+    ptos = (pos, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11)
     pygame.draw.polygon(pantalla, cl, ptos)
     
 #---------------------------------------------------------------------------------

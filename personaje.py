@@ -4,16 +4,16 @@ from constantes import *
 
 class Personaje(pygame.sprite.Sprite):
 
-    def __init__(self, m, lim_anim = [0,2], desp = 0):
+    def __init__(self, mp, lim_anim = [0,2], desp = 0):
         pygame.sprite.Sprite.__init__(self)
-        self.m = m
+        self.mp = mp
         self.anm_ini = lim_anim[0]
         self.anm_fin = lim_anim[1]
 
         self.col = self.anm_ini
         self.dir = desp
 
-        self.image = self.m[self.dir][self.col]
+        self.image = self.mp[self.dir][self.col]
         self.rect = self.image.get_rect()
 
         self.rect.x = 20
@@ -33,7 +33,7 @@ class Personaje(pygame.sprite.Sprite):
 
     def update(self):
         if self.velx != self.vely:
-            self.image = self.m[self.dir][self.col]
+            self.image = self.mp[self.dir][self.col]
 
             if self.col < self.anm_fin:
                 self.col += 1

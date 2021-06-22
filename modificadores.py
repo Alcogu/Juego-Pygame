@@ -21,3 +21,7 @@ class Modificadores(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
         self.idemodi = idmodi
+
+    def update(self):
+        self.rect.x += self.velx
+        self.rect.y += self.vely
