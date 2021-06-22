@@ -37,14 +37,14 @@ if __name__ == "__main__":
     fondos.add(f)
 
     #Ciclo presentacion
-    seguir = False
+    presentacion = True
 
-    while True and not seguir:
+    while True and presentacion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                seguir = True
+                presentacion = False
 
         texto = fuente.render("¡¡¡Bienvenido!!! ", True, blanco)
         texto2 = fuente.render("Preciona una tecla para jugar", True, blanco)
@@ -57,18 +57,13 @@ if __name__ == "__main__":
     items_alto = 4
     mi = recorte(items_ancho, items_alto, imgItems)
 
-    #Modificador Salud
-    m = Modificadores([posRandomX, posRandomY], mi, [11, 1], despm = 0)
-    modificadores.add(m)
-
-    m = Modificadores([posRandomX1, posRandomY1], mi, [11, 1], despm = 0)
-    modificadores.add(m)
-
-    m = Modificadores([posRandomX2, posRandomY2], mi, [11, 1], despm = 0)
-    modificadores.add(m)
-
-    m = Modificadores([posRandomX3, posRandomY3], mi, [11, 1], despm = 0)
-    modificadores.add(m)
+    ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
+                        [posRandomX2, posRandomY2], [posRandomX3, posRandomY3])
+    con = 0
+    for m in ls_modificadores:
+        m = Modificadores(con, m, mi, [11, 1], despm = 0)
+        con += 1
+        modificadores.add(m)
 
     #recorte generador
     gen_ancho = 4
@@ -156,7 +151,6 @@ if __name__ == "__main__":
                 p.vely = 0
 
             if event.type == pygame.KEYDOWN:
-
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
                 if event.key == pygame.K_UP:
@@ -268,10 +262,12 @@ if __name__ == "__main__":
     if perder:
         pygame.mixer.pause()
         p.morir.play()
-        pantalla.fill(negro)
         pantalla.blit(imgGameOver, [-60, -60])
         pygame.display.flip()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        sys.exit()

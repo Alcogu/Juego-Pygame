@@ -4,7 +4,7 @@ from constantes import *
 
 class Modificadores(pygame.sprite.Sprite):
 
-    def __init__(self, pos, mi, lim_anim=[0,2], despm = 0):
+    def __init__(self, idmodi, pos, mi, lim_anim=[0,2], despm = 0):
         pygame.sprite.Sprite.__init__(self)
         self.mg = mi
         self.anm_ini = lim_anim[0]
@@ -20,3 +20,4 @@ class Modificadores(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
+        self.idemodi = idmodi
