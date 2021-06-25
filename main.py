@@ -7,7 +7,7 @@ from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
 from modificadores import Modificadores
-from funciones import corazon
+from funciones import *
 
 from imagenes import *
 from constantes import *
