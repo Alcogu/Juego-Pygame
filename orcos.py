@@ -25,7 +25,6 @@ class Orcos(pygame.sprite.Sprite):
 
         self.bloques = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
-        self.indicadores = pygame.sprite.Group()
 
     #Dirección de salida aleatoria
     def CambiarDirOrcs(self):

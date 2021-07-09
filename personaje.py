@@ -21,6 +21,7 @@ class Personaje(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
         self.salud = 5
+        self.contLlaves = 0
         self.limitesuperior = 20
         self.aceleracion = 0
 
@@ -28,9 +29,10 @@ class Personaje(pygame.sprite.Sprite):
         self.generadores = pygame.sprite.Group()
         self.enemigos = pygame.sprite.Group()
         self.modificadores = pygame.sprite.Group()
-        self.indicadores = pygame.sprite.Group()
+        self.llaves = pygame.sprite.Group()
         self.orcos = pygame.sprite.Group()
         self.morir = pygame.mixer.Sound('sounds/muerte.wav')
+        self.ganar = pygame.mixer.Sound('sounds/ganar.wav')
 
     def update(self):
         if self.velx != self.vely:
@@ -78,6 +80,10 @@ class Personaje(pygame.sprite.Sprite):
         col = pygame.sprite.spritecollide(self, self.modificadores, True)
         for m in col:
             self.salud += 1
+
+        col = pygame.sprite.spritecollide(self, self.llaves, True)
+        for k in col:
+            self.contLlaves += 1
 
         if self.rect.left < 0:
             self.rect.left = 0

@@ -1,10 +1,15 @@
 from funciones import recorte
 from imagenes import *
 
-#recorte items
+#recorte item Corazon
 items_ancho = 16
 items_alto = 4
 mi = recorte(items_ancho, items_alto, imgItems)
+
+#recorte item Llave
+items_ancho = 16
+items_alto = 4
+mll = recorte(items_ancho, items_alto, imgLlave)
 
 #recorte generador
 gen_ancho = 4
@@ -16,12 +21,12 @@ sp_ancho = 12
 sp_alto = 8
 mp = recorte(sp_ancho, sp_alto, imgPersonaje)
 
-#Recorte imagen de Enemigos
+#Recorte imagen de Perros
 en_ancho = 3
 en_alto = 4
 me = recorte(en_ancho, en_alto, imgEnemigo)
 
-#Recorte imagen de Enemigos
+#Recorte imagen de Orcos
 or_ancho = 3
 or_alto = 4
 mo = recorte(or_ancho, or_alto, imgOrcos)

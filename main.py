@@ -8,6 +8,7 @@ from generador import Generador
 from enemigos import Enemigos
 from orcos import Orcos
 from modificadores import Modificadores
+from llaves import Llaves
 from funciones import *
 
 from imagenes import *
@@ -44,7 +45,7 @@ if __name__ == "__main__":
     enemigos = pygame.sprite.Group()
     orcos = pygame.sprite.Group()
     modificadores = pygame.sprite.Group()
-    indicadores = pygame.sprite.Group()
+    llaves = pygame.sprite.Group()
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -52,6 +53,7 @@ if __name__ == "__main__":
     musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
     musicaFondo.play()
 
+    #Modificador Corazones
     ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
                         [posRandomX2, posRandomY2], [posRandomX3, posRandomY3])
     con = 0
@@ -59,6 +61,15 @@ if __name__ == "__main__":
         m = Modificadores(con, m, mi, [11, 1], despm = 0)
         con += 1
         modificadores.add(m)
+
+    #Modificador Llaves
+    ls_llaves = ([posLlaveX, posRandomY], [posLlaveX1, posLlaveY1],
+                        [posLlaveX2, posLlaveY2])
+    con = 0
+    for mll in ls_llaves:
+        mll = Llaves(con, mll, mi, [13, 3], despll = 2)
+        con += 1
+        llaves.add(mll)
 
     #Generador
     ls_gen = [(350, 90), (500, 200), (100, 200), 
@@ -109,7 +120,7 @@ if __name__ == "__main__":
     p.enemigos = enemigos
     p.orcos = orcos
     p.modificadores = modificadores
-    p.indicadores = indicadores
+    p.llaves = llaves
 
     reloj = pygame.time.Clock()
     ganar = False
@@ -202,9 +213,15 @@ if __name__ == "__main__":
         #Condición para fin de juego por salud
         for p in personajes:
             if p.salud <= 0:
-                personajes.remove(p)
                 perder = True
         if perder:
+            break
+
+        #Condición para fin de juego por victoria
+        for p in personajes:
+            if p.contLlaves == 1:
+                ganar = True
+        if ganar:
             break
 
         #Actualizaciones
@@ -214,6 +231,7 @@ if __name__ == "__main__":
         enemigos.update()
         orcos.update()
         modificadores.update()
+        llaves.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -224,9 +242,14 @@ if __name__ == "__main__":
         infoSalud = "Salud: "
         textoSalud = fuente.render(infoSalud, False, blanco)
 
+        #Llaves obtenidas
+        infoLlaves = "Llaves: " + str(p.contLlaves)
+        textoLlaves = fuente.render(infoLlaves, False, blanco)
+
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantalla.blit(textoSalud, [2, 2])
         pantalla.blit(texto, [500, 2])
+        pantalla.blit(textoLlaves, [300, 2])
 
         #Aumento de corazones por generador
         for s in range(p.salud):
@@ -239,6 +262,7 @@ if __name__ == "__main__":
         enemigos.draw(pantalla)
         orcos.draw(pantalla)
         modificadores.draw(pantalla)
+        llaves.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)
@@ -251,11 +275,25 @@ if __name__ == "__main__":
         if f.f_y > f.f_limy:
             f.f_y += f.f_vy
 
-        #Mensaje fin del juego
+    #Game Over
     if perder:
         pygame.mixer.pause()
         p.morir.play()
         pantalla.blit(imgGameOver, [-60, -60])
+        pygame.display.flip()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        sys.exit()
+    
+    #Winner
+    if ganar:
+        pygame.mixer.pause()
+        p.ganar.play()
+        pantalla.blit(imgWinner, [-90, 0])
         pygame.display.flip()
         while True:
             for event in pygame.event.get():

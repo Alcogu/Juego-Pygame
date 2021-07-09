@@ -30,3 +30,15 @@ posRandomY2 = (random.randint(0, 1281))
 
 posRandomX3 = (random.randint(0, 1920))
 posRandomY3 = (random.randint(0, 1281))
+
+#-------------------------------------------------------------------------
+#Posiciones aleatorias para los modificadores de Llave
+
+posLlaveX = (random.randint(0, 600))
+posLlaveY = (random.randint(0, 400))
+
+posLlaveX1 = (random.randint(0, 1920))
+posLlaveY1 = (random.randint(0, 1281))
+
+posLlaveX2 = (random.randint(0, 1920))
+posLlaveY2 = (random.randint(0, 1281))
