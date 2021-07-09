@@ -28,7 +28,7 @@ class Orcos(pygame.sprite.Sprite):
         self.indicadores = pygame.sprite.Group()
 
     #Dirección de salida aleatoria
-    def CambiarDir(self):
+    def CambiarDirOrcs(self):
 
         eje = random.randrange(100)
         sentido = random.randrange(100)

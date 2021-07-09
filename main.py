@@ -49,7 +49,7 @@ if __name__ == "__main__":
     f = Fondo(imgFondo)
     fondos.add(f)
 
-    musicaFondo = pygame.mixer.Sound('sounds/mdf.wav')
+    musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
     musicaFondo.play()
 
     ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
                 if tipo_enemigo < 7:
                     e = Enemigos((g.RetPos()), g.id, me, despe = 1)
-                    e.CambiarDir()
+                    e.CambiarDirDogs()
                     enemigos.add(e)
                     g.temp = 100
                     g.crear = False
@@ -164,7 +164,7 @@ if __name__ == "__main__":
 
                 else:
                     o = Orcos((g.RetPos()), g.id, mo, despo = 1)
-                    o.CambiarDir()
+                    o.CambiarDirOrcs()
                     orcos.add(o)
                     g.temp = 100
                     g.crear = False
