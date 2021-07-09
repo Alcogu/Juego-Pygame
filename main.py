@@ -210,6 +210,10 @@ if __name__ == "__main__":
             m.velx = f.f_vx   
             m.vely = f.f_vy
 
+        for mll in llaves:
+            mll.velx = f.f_vx   
+            mll.vely = f.f_vy
+
         #Condición para fin de juego por salud
         for p in personajes:
             if p.salud <= 0:
@@ -219,7 +223,7 @@ if __name__ == "__main__":
 
         #Condición para fin de juego por victoria
         for p in personajes:
-            if p.contLlaves == 1:
+            if p.contLlaves == 3:
                 ganar = True
         if ganar:
             break

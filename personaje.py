@@ -31,8 +31,11 @@ class Personaje(pygame.sprite.Sprite):
         self.modificadores = pygame.sprite.Group()
         self.llaves = pygame.sprite.Group()
         self.orcos = pygame.sprite.Group()
+
+        #Sounds
         self.morir = pygame.mixer.Sound('sounds/muerte.wav')
         self.ganar = pygame.mixer.Sound('sounds/ganar.wav')
+        self.soundkey = pygame.mixer.Sound('sounds/coin.wav')
 
     def update(self):
         if self.velx != self.vely:
@@ -83,7 +86,9 @@ class Personaje(pygame.sprite.Sprite):
 
         col = pygame.sprite.spritecollide(self, self.llaves, True)
         for k in col:
+            self.soundkey.play()
             self.contLlaves += 1
+            
 
         if self.rect.left < 0:
             self.rect.left = 0
