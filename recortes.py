@@ -21,6 +21,11 @@ en_ancho = 3
 en_alto = 4
 me = recorte(en_ancho, en_alto, imgEnemigo)
 
+#Recorte imagen de Enemigos
+or_ancho = 3
+or_alto = 4
+mo = recorte(or_ancho, or_alto, imgOrcos)
+
 #Recorte de la imagen para los bloques
 bl_ancho = 2
 bl_alto = 12

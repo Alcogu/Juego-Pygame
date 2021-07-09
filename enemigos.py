@@ -92,7 +92,6 @@ class Enemigos(pygame.sprite.Sprite):
                     self.velx = 5
             #En caso de colición en el eje X se reduce salud del Personaje
             p.salud -= 1
-            #p.indicadores.kill(p.indi)
 
         #Cambio de sprite y sentido del movimiento en el eje X después de la colición
         #con el limite izquierdo de la pantalla

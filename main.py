@@ -6,6 +6,7 @@ from bloques import Bloques
 from fondo import Fondo
 from generador import Generador
 from enemigos import Enemigos
+from orcos import Orcos
 from modificadores import Modificadores
 from funciones import *
 
@@ -41,6 +42,7 @@ if __name__ == "__main__":
     bloques = pygame.sprite.Group()
     generadores = pygame.sprite.Group()
     enemigos = pygame.sprite.Group()
+    orcos = pygame.sprite.Group()
     modificadores = pygame.sprite.Group()
     indicadores = pygame.sprite.Group()
 
@@ -105,6 +107,7 @@ if __name__ == "__main__":
     p.bloques = bloques
     p.generadores = generadores
     p.enemigos = enemigos
+    p.orcos = orcos
     p.modificadores = modificadores
     p.indicadores = indicadores
 
@@ -142,18 +145,32 @@ if __name__ == "__main__":
                     p.vely = 0
                     p.dir = desp + 1
 
-        #Generador de perros esqueletos
+        #Generador de perros esqueletos y orcos
         for g in generadores:
             if g.crear and (g.pob < g.lim):
-                e = Enemigos((g.RetPos()), g.id, me, despe = 1)
-                e.CambiarDir()
-                enemigos.add(e)
-                g.temp = 100
-                g.crear = False
-                g.pob += 1
+                tipo_enemigo = random.randrange(10)
+
+                if tipo_enemigo < 7:
+                    e = Enemigos((g.RetPos()), g.id, me, despe = 1)
+                    e.CambiarDir()
+                    enemigos.add(e)
+                    g.temp = 100
+                    g.crear = False
+                    g.pob += 1
+
+                    e.bloques = bloques
+                    e.personajes = personajes
+
+                else:
+                    o = Orcos((g.RetPos()), g.id, mo, despo = 1)
+                    o.CambiarDir()
+                    orcos.add(o)
+                    g.temp = 100
+                    g.crear = False
+                    g.pob += 1
                 
-                e.bloques = bloques
-                e.personajes = personajes
+                    o.bloques = bloques
+                    o.personajes = personajes
 
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
@@ -194,6 +211,7 @@ if __name__ == "__main__":
         bloques.update()
         generadores.update()
         enemigos.update()
+        orcos.update()
         modificadores.update()
         
         #Tiempo transcurrido de la partida
@@ -218,6 +236,7 @@ if __name__ == "__main__":
         bloques.draw(pantalla)
         generadores.draw(pantalla)
         enemigos.draw(pantalla)
+        orcos.draw(pantalla)
         modificadores.draw(pantalla)
         
         pygame.display.flip()

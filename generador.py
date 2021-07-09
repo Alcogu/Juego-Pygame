@@ -20,7 +20,7 @@ class Generador(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
-        self.lim = 1
+        self.lim = 3
         self.pob = 0
         self.id = id
         self.temp = 10
