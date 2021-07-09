@@ -166,9 +166,6 @@ if __name__ == "__main__":
                     e = Enemigos((g.RetPos()), g.id, me, despe = 1)
                     e.CambiarDirDogs()
                     enemigos.add(e)
-                    g.temp = 100
-                    g.crear = False
-                    g.pob += 1
 
                     e.bloques = bloques
                     e.personajes = personajes
@@ -177,12 +174,15 @@ if __name__ == "__main__":
                     o = Orcos((g.RetPos()), g.id, mo, despo = 1)
                     o.CambiarDirOrcs()
                     orcos.add(o)
-                    g.temp = 100
-                    g.crear = False
-                    g.pob += 1
-                
+
                     o.bloques = bloques
                     o.personajes = personajes
+
+                g.temp = 200
+                g.crear = False
+                g.pob += 1
+                
+                    
 
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:

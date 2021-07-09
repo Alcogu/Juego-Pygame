@@ -23,7 +23,7 @@ class Generador(pygame.sprite.Sprite):
         self.lim = 3
         self.pob = 0
         self.id = id
-        self.temp = 10
+        self.temp = 200
         self.crear = False
 
     def RetPos(self):
