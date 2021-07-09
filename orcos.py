@@ -35,13 +35,17 @@ class Orcos(pygame.sprite.Sprite):
         if eje > 50:
             if sentido > 50:
                 self.vely = -3
+                self.dir = 3
             else:
                 self.vely = 3
+                self.dir = 0
         else:
             if sentido > 50:
                 self.velx = -3
+                self.dir = 1
             else:
                 self.velx = 3
+                self.dir = 2
 
     def update(self):
 
@@ -59,33 +63,33 @@ class Orcos(pygame.sprite.Sprite):
         for b in col:
             if self.velx > 0:
                     self.rect.right = b.rect.left
-                    self.dir = self.despo = 1
+                    self.dir = self.dir = 1
                     self.velx = -3
             else:
                     self.rect.left = b.rect.right
-                    self.dir = self.despo = 2
+                    self.dir = self.dir = 2
                     self.velx = 3
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col:
             if self.velx > 0:
                     self.rect.right = p.rect.left
-                    self.dir = self.despo = 1
+                    self.dir = self.dir = 1
                     self.velx = -3
             else:
                     self.rect.left = p.rect.right
-                    self.dir = self.despo = 2
+                    self.dir = self.dir = 2
                     self.velx = 3
             p.salud -= 2
  
         if self.rect.left < 0:
             self.rect.left = 0
-            self.dir = self.despo = 2
+            self.dir = self.dir = 2
             self.velx = 3
 
         if self.rect.right > ancho:
             self.rect.right = ancho
-            self.dir = self.despo = 1
+            self.dir = self.dir = 1
             self.velx = -3
 
         self.rect.y += self.vely
@@ -94,31 +98,31 @@ class Orcos(pygame.sprite.Sprite):
         for b in col: 
             if self.vely > 0:
                     self.rect.bottom = b.rect.top
-                    self.dir = self.despo = 3
+                    self.dir = self.dir = 3
                     self.vely = -3
             else:
                     self.rect.top = b.rect.bottom
-                    self.dir = self.despo = 0
+                    self.dir = self.dir = 0
                     self.vely = 3
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col:
             if self.vely > 0:
                     self.rect.bottom = p.rect.top
-                    self.dir = self.despo = 3
+                    self.dir = self.dir = 3
                     self.vely = -3
             else:
                     self.rect.top = p.rect.bottom
-                    self.dir = self.despo = 0
+                    self.dir = self.dir = 0
                     self.vely = 3
             p.salud -= 2
 
         if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior
-            self.dir = self.despo = 0
+            self.dir = self.dir = 0
             self.vely = 3
 
         if self.rect.bottom > alto:
             self.rect.bottom = alto
-            self.dir = self.despo = 3
+            self.dir = self.dir = 3
             self.vely = -3

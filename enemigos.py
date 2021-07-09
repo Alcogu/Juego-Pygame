@@ -35,13 +35,17 @@ class Enemigos(pygame.sprite.Sprite):
         if eje > 50:
             if sentido > 50:
                 self.vely = -5
+                self.dir = 3
             else:
                 self.vely = 5
+                self.dir = 0
         else:
             if sentido > 50:
                 self.velx = -5
+                self.dir = 1
             else:
                 self.velx = 5
+                self.dir = 2
 
     def update(self):
 

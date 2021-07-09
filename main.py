@@ -149,6 +149,7 @@ if __name__ == "__main__":
         for g in generadores:
             if g.crear and (g.pob < g.lim):
                 tipo_enemigo = random.randrange(10)
+                orientacion = 0
 
                 if tipo_enemigo < 7:
                     e = Enemigos((g.RetPos()), g.id, me, despe = 1)
