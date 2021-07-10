@@ -13,22 +13,9 @@ class Flecha(pygame.sprite.Sprite):
         self.vely = 0
         self.velx = 0
 
-        self.personajes = pygame.sprite.Group()
+        #self.personajes = pygame.sprite.Group()
 
     def update(self):
-
-        """if self.personaje.orientacion == 1:
-            self.personaje.rect.midtop
-            self.vely = -5
-        if self.personaje.orientacion == 2:
-            self.personaje.rect.midbottom
-            self.vely = 5
-        if self.personaje.orientacion == 3:
-            self.personaje.rect.midleft
-            self.velx = -5
-        if self.personaje.orientacion == 4:
-            self.personaje.rect.midright
-            self.vely = 5"""
 
         self.rect.y += self.vely
         self.rect.x += self.velx

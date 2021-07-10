@@ -148,29 +148,35 @@ if __name__ == "__main__":
                     p.velx = 0
                     p.vely = -5
                     p.dir = desp + 3
-                    p.orientacion == 1
+                    p.orientacion = 1
                 if event.key == pygame.K_DOWN:
                     p.velx = 0
                     p.vely = 5
                     p.dir = desp + 0
-                    p.orientacion == 2
+                    p.orientacion = 2
                 if event.key == pygame.K_LEFT:
                     p.velx = -5
                     p.vely = 0
                     p.dir = desp + 1
-                    p.orientacion == 3
+                    p.orientacion = 3
                 if event.key == pygame.K_RIGHT:
                     p.velx = 5
                     p.vely = 0
                     p.dir = desp + 2
-                    p.orientacion == 4
-                """if event.key == pygame.K_SPACE:
-                    #fle = Flecha(p.rect.midtop)
-                    fle = Flecha(p.orientacion)
+                    p.orientacion = 4
+                if event.key == pygame.K_SPACE and p.orientacion == 1:
+                    fle = Flecha(p.rect.midtop)
                     flechas.add(fle)
-
-                    fle.personajes = personajes"""
-                        
+                if event.key == pygame.K_SPACE and p.orientacion == 2:
+                    fle = Flecha(p.rect.midbottom)
+                    flechas.add(fle)
+                if event.key == pygame.K_SPACE and p.orientacion == 3:
+                    fle = Flecha(p.rect.midleft)
+                    flechas.add(fle)
+                if event.key == pygame.K_SPACE and p.orientacion == 4:
+                    fle = Flecha(p.rect.midright)
+                    flechas.add(fle)
+            
         #Generador de perros esqueletos y orcos
         for g in generadores:
             if g.crear and (g.pob < g.lim):
