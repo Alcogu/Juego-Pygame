@@ -9,6 +9,7 @@ from enemigos import Enemigos
 from orcos import Orcos
 from modificadores import Modificadores
 from llaves import Llaves
+from flecha import Flecha
 from funciones import *
 
 from imagenes import *
@@ -49,6 +50,7 @@ if __name__ == "__main__":
     orcos = pygame.sprite.Group()
     modificadores = pygame.sprite.Group()
     llaves = pygame.sprite.Group()
+    flechas = pygame.sprite.Group()
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -146,19 +148,29 @@ if __name__ == "__main__":
                     p.velx = 0
                     p.vely = -5
                     p.dir = desp + 3
+                    p.orientacion == 1
                 if event.key == pygame.K_DOWN:
                     p.velx = 0
                     p.vely = 5
                     p.dir = desp + 0
-                if event.key == pygame.K_RIGHT:
-                    p.velx = 5
-                    p.vely = 0
-                    p.dir = desp + 2
+                    p.orientacion == 2
                 if event.key == pygame.K_LEFT:
                     p.velx = -5
                     p.vely = 0
                     p.dir = desp + 1
+                    p.orientacion == 3
+                if event.key == pygame.K_RIGHT:
+                    p.velx = 5
+                    p.vely = 0
+                    p.dir = desp + 2
+                    p.orientacion == 4
+                """if event.key == pygame.K_SPACE:
+                    #fle = Flecha(p.rect.midtop)
+                    fle = Flecha(p.orientacion)
+                    flechas.add(fle)
 
+                    fle.personajes = personajes"""
+                        
         #Generador de perros esqueletos y orcos
         for g in generadores:
             if g.crear and (g.pob < g.lim):
@@ -237,6 +249,7 @@ if __name__ == "__main__":
         orcos.update()
         modificadores.update()
         llaves.update()
+        flechas.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -268,6 +281,7 @@ if __name__ == "__main__":
         orcos.draw(pantalla)
         modificadores.draw(pantalla)
         llaves.draw(pantalla)
+        flechas.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)

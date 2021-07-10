@@ -1,5 +1,6 @@
 import pygame
 
+from flecha import Flecha
 from constantes import *
 
 class Personaje(pygame.sprite.Sprite):
@@ -23,7 +24,7 @@ class Personaje(pygame.sprite.Sprite):
         self.salud = 5
         self.contLlaves = 0
         self.limitesuperior = 20
-        self.aceleracion = 0
+        self.orientacion = 0
 
         self.bloques = pygame.sprite.Group()
         self.generadores = pygame.sprite.Group()
