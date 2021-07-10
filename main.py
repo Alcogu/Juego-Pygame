@@ -31,10 +31,13 @@ if __name__ == "__main__":
             if event.type == pygame.KEYDOWN:
                 presentacion = False
 
-        texto = fuente.render("¡¡¡Bienvenido!!! ", True, blanco)
-        texto2 = fuente.render("Oprime una tecla para empezar la aventura", True, blanco)
-        pantalla.blit(texto, [ancho//3,alto//3])
-        pantalla.blit(texto2, [50,alto//2])
+        texto2 = fuente.render("Oprime una tecla para empezar la aventura", True, azul)
+        texto3 = fuente.render("Debes recolectar las 3 llaves sin dejar", True, verde)
+        texto4 = fuente.render(" que te quedes sin salud", True, verde)
+
+        pantalla.blit(texto2, [50,alto//5])
+        pantalla.blit(texto3, [90, 240])
+        pantalla.blit(texto4, [150, 270])
         pygame.display.flip()
 
     #grupos
@@ -181,8 +184,6 @@ if __name__ == "__main__":
                 g.temp = 200
                 g.crear = False
                 g.pob += 1
-                
-                    
 
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
@@ -240,15 +241,15 @@ if __name__ == "__main__":
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
         infoTime = "Tiempo: " + str(tiempo)
-        texto = fuente.render(infoTime, False, blanco)
+        texto = fuente.render(infoTime, False, morado)
 
         #Salud del personaje
         infoSalud = "Salud: "
-        textoSalud = fuente.render(infoSalud, False, blanco)
+        textoSalud = fuente.render(infoSalud, False, rojo)
 
         #Llaves obtenidas
         infoLlaves = "Llaves: " + str(p.contLlaves)
-        textoLlaves = fuente.render(infoLlaves, False, blanco)
+        textoLlaves = fuente.render(infoLlaves, False, dorado)
 
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantalla.blit(textoSalud, [2, 2])
