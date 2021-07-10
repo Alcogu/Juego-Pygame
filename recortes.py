@@ -1,15 +1,10 @@
 from funciones import recorte
 from imagenes import *
 
-#recorte item Corazon
+#recorte items
 items_ancho = 16
 items_alto = 4
 mi = recorte(items_ancho, items_alto, imgItems)
-
-#recorte item Llave
-items_ancho = 16
-items_alto = 4
-mll = recorte(items_ancho, items_alto, imgLlave)
 
 #recorte generador
 gen_ancho = 4

@@ -72,7 +72,7 @@ if __name__ == "__main__":
                         [posLlaveX2, posLlaveY2])
     con = 0
     for mll in ls_llaves:
-        mll = Llaves(con, mll, mi, [13, 3], despll = 2)
+        mll = Llaves(con, mll, mi, 13, despll = 2)
         con += 1
         llaves.add(mll)
 
@@ -165,18 +165,22 @@ if __name__ == "__main__":
                     p.dir = desp + 2
                     p.orientacion = 4
                 if event.key == pygame.K_SPACE and p.orientacion == 1:
-                    fle = Flecha(p.rect.midtop)
+                    fle = Flecha(p.rect.midtop, mi, 2, despmfl = 0)
                     flechas.add(fle)
+                    fle.vely = -3
                 if event.key == pygame.K_SPACE and p.orientacion == 2:
-                    fle = Flecha(p.rect.midbottom)
+                    fle = Flecha(p.rect.midbottom, mi, 0, despmfl = 0)
                     flechas.add(fle)
+                    fle.vely = 3
                 if event.key == pygame.K_SPACE and p.orientacion == 3:
-                    fle = Flecha(p.rect.midleft)
+                    fle = Flecha(p.rect.midleft, mi, 1, despmfl = 0)
                     flechas.add(fle)
+                    fle.velx = -3
                 if event.key == pygame.K_SPACE and p.orientacion == 4:
-                    fle = Flecha(p.rect.midright)
+                    fle = Flecha(p.rect.midright, mi, 3, despmfl = 0)
                     flechas.add(fle)
-            
+                    fle.velx = 3
+             
         #Generador de perros esqueletos y orcos
         for g in generadores:
             if g.crear and (g.pob < g.lim):

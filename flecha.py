@@ -3,19 +3,22 @@ from constantes import *
 
 class Flecha(pygame.sprite.Sprite):
 
-    def __init__(self, pos):
+    def __init__(self, pos, mfl, anim = 0, despmfl = 0):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([5,20])
-        self.image.fill(blanco)
+        self.mfl = mfl
+        self.anim = anim
+
+        self.col = self.anim
+        self.dir = despmfl
+
+        self.image = self.mfl[self.dir][self.col]
         self.rect = self.image.get_rect()
+        
         self.rect.x = pos[0]
         self.rect.y = pos[1]
-        self.vely = 0
         self.velx = 0
-
-        #self.personajes = pygame.sprite.Group()
+        self.vely = 0
 
     def update(self):
-
-        self.rect.y += self.vely
         self.rect.x += self.velx
+        self.rect.y += self.vely

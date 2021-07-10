@@ -4,13 +4,12 @@ from constantes import *
 
 class Llaves(pygame.sprite.Sprite):
 
-    def __init__(self, idkey, pos, mll, lim_anim = [0,2], despll = 0):
+    def __init__(self, idkey, pos, mll, anim = 0, despll = 0):
         pygame.sprite.Sprite.__init__(self)
+        self.anim = anim
         self.mll = mll
-        self.anm_ini = lim_anim[0]
-        self.anm_fin = lim_anim[1]
 
-        self.col = self.anm_ini
+        self.col = self.anim
         self.dir = despll
 
         self.image = self.mll[self.dir][self.col]
