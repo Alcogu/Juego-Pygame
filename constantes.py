@@ -21,26 +21,26 @@ altoIma = 1281
 #-------------------------------------------------------------------------
 #Posiciones aleatorias para los modificadores de vida
 
-posRandomX = (random.randint(0, 600))
-posRandomY = (random.randint(0, 400))
+posRandomX = (random.randint(90, 600))
+posRandomY = (random.randint(90, 400))
 
-posRandomX1 = (random.randint(0, 1920))
-posRandomY1 = (random.randint(0, 1281))
+posRandomX1 = (random.randint(90, 1920))
+posRandomY1 = (random.randint(90, 1281))
 
-posRandomX2 = (random.randint(0, 1920))
-posRandomY2 = (random.randint(0, 1281))
+posRandomX2 = (random.randint(90, 1920))
+posRandomY2 = (random.randint(90, 1281))
 
-posRandomX3 = (random.randint(0, 1920))
-posRandomY3 = (random.randint(0, 1281))
+posRandomX3 = (random.randint(90, 1920))
+posRandomY3 = (random.randint(90, 1281))
 
 #-------------------------------------------------------------------------
 #Posiciones aleatorias para los modificadores de Llave
 
-posLlaveX = (random.randint(0, 600))
-posLlaveY = (random.randint(0, 400))
+posLlaveX = (random.randint(90, 600))
+posLlaveY = (random.randint(90, 400))
 
-posLlaveX1 = (random.randint(0, 1920))
-posLlaveY1 = (random.randint(0, 1281))
+posLlaveX1 = (random.randint(90, 1920))
+posLlaveY1 = (random.randint(90, 1281))
 
-posLlaveX2 = (random.randint(0, 1920))
-posLlaveY2 = (random.randint(0, 1281))
+posLlaveX2 = (random.randint(90, 1920))
+posLlaveY2 = (random.randint(90, 1281))

@@ -153,12 +153,12 @@ if __name__ == "__main__":
                     j.velx = -10
                     j.vely = 0
             
-        #Movimiento en mapa hacia la derecha
-        if j.rect.right > lim_d:
-            j.rect.right = lim_d
-            f_vx = -5
+        #Movimiento en mapa hacia arriba
+        if j.rect.top < lim_up:
+            j.rect.top = lim_up
+            f_vyup = 5
         else:
-            f_vx = 0
+            f_vyup = 0
 
         #Movimiento en mapa hacia abajo
         if j.rect.bottom > lim_a:
@@ -174,16 +174,16 @@ if __name__ == "__main__":
         else:
             f_vxleft = 0
 
-        #Movimiento en mapa hacia arriba
-        if j.rect.top < lim_up:
-            j.rect.top = lim_up
-            f_vyup = 5
+        #Movimiento en mapa hacia la derecha
+        if j.rect.right > lim_d:
+            j.rect.right = lim_d
+            f_vx = -5
         else:
-            f_vyup = 0
+            f_vx = 0
         
-        """for b in bloques:
-            b.velx = 0   
-            b.vely = 0"""
+        for b in bloques:
+            b.velx = f_vx  
+            b.vely = f_vy
         
         jugadores.update()
         bloques.update()

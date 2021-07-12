@@ -17,8 +17,8 @@ class Personaje(pygame.sprite.Sprite):
         self.image = self.mp[self.dir][self.col]
         self.rect = self.image.get_rect()
 
-        self.rect.x = 20
-        self.rect.y = 20
+        self.rect.x = 70
+        self.rect.y = 70
         self.velx = 0
         self.vely = 0
         self.salud = 5

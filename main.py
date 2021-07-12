@@ -58,7 +58,7 @@ if __name__ == "__main__":
     fondos.add(f)
 
     musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
-    musicaFondo.play()
+    musicaFondo.play(0, -1)
 
     #Modificador Corazones
     ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         llaves.add(mll)
 
     #Generador
-    ls_gen = [(350, 90), (500, 200), (100, 200), 
+    ls_gen = [(350, 130), (500, 200), (100, 200), 
     #(350, 1100), (1600, 75), (1600, 1100)
     ]
     con = 0
@@ -181,19 +181,19 @@ if __name__ == "__main__":
                 if event.key == pygame.K_SPACE and p.orientacion == 1:
                     fle = Flecha(p.rect.midtop, mi, 2, despmfl = 3)
                     flechas.add(fle)
-                    fle.vely = -3
+                    fle.vely = -5
                 if event.key == pygame.K_SPACE and p.orientacion == 2:
                     fle = Flecha(p.rect.midbottom, mi, 0, despmfl = 3)
                     flechas.add(fle)
-                    fle.vely = 3
+                    fle.vely = 5
                 if event.key == pygame.K_SPACE and p.orientacion == 3:
                     fle = Flecha(p.rect.midleft, mi, 1, despmfl = 3)
                     flechas.add(fle)
-                    fle.velx = -3
+                    fle.velx = -5
                 if event.key == pygame.K_SPACE and p.orientacion == 4:
                     fle = Flecha(p.rect.midright, mi, 3, despmfl = 3)
                     flechas.add(fle)
-                    fle.velx = 3
+                    fle.velx = 5
 
                     fle.enemigos = enemigos
                     fle.orcos = orcos
