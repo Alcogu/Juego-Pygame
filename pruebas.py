@@ -5,7 +5,7 @@ import sys
 
 verde = [47, 163, 41]
 blanco = [255,255,255]
-ancho = 800
+ancho = 700
 alto = 500
 dj = 30
 
@@ -106,19 +106,19 @@ if __name__ == "__main__":
     f_limy_positivo = f_alto - alto
 
     #Limites para avanzar o retroceder
-    lim_d = 799
-    lim_a = 499
-    lim_up = 10
-    lim_iz = 10
+    lim_d = ancho -1
+    lim_a = alto - 1
+    lim_up = 1
+    lim_iz = 1
 
     jugadores = pygame.sprite.Group()
     bloques = pygame.sprite.Group()
 
-    b=Bloque([400,200] , [dj,dj*5])
+    """b=Bloque([400,200] , [dj,dj*5])
     bloques.add(b)
 
     b=Bloque([3800,200] , [dj,dj*5])
-    bloques.add(b)
+    bloques.add(b)"""
 
     j = Jugador()
     j.bloques=bloques
@@ -142,15 +142,15 @@ if __name__ == "__main__":
 
                 if event.key == pygame.K_UP:
                     j.velx = 0
-                    j.vely = -5
+                    j.vely = -10
                 if event.key == pygame.K_DOWN:
                     j.velx = 0
-                    j.vely = 5
+                    j.vely = 10
                 if event.key == pygame.K_RIGHT:
-                    j.velx = 5
+                    j.velx = 10
                     j.vely = 0
                 if event.key == pygame.K_LEFT:
-                    j.velx = -5
+                    j.velx = -10
                     j.vely = 0
             
         #Movimiento en mapa hacia la derecha
@@ -181,11 +181,11 @@ if __name__ == "__main__":
         else:
             f_vyup = 0
         
-        for b in bloques:
+        """for b in bloques:
             b.velx = f_vx   
             b.vely = f_vy
             b.velx = f_vxleft   
-            b.vely = f_vyup
+            b.vely = f_vyup"""
         
         jugadores.update()
         bloques.update()
@@ -204,9 +204,15 @@ if __name__ == "__main__":
 
         if f_y > f_limy:
             f_y += f_vy
+        
+        if f_x < f_limx_positivo:
+            f_x += f_vxleft
 
-        if f_xleft < f_limx_positivo:
-            f_xleft += f_vxleft
+            if f_x > f_vxleft:
+                f_x = 0
 
-        if f_yup < f_limy_positivo:
-            f_yup += f_vyup
+        if f_y < f_limy_positivo:
+            f_y += f_vyup
+
+            if f_y > f_vyup:
+                f_y = 0
