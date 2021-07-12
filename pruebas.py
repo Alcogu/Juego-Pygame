@@ -1,125 +1,212 @@
 import pygame
-import sys
-import random
+import sys 
 
-gris =  [135, 133, 133]
-azul = [76,160,233]
-rojo = [245,15,15]
+#Fondo ancho 4000 alto 3000
+
 verde = [47, 163, 41]
-negro = [0,0,0]
 blanco = [255,255,255]
+ancho = 800
+alto = 500
+dj = 30
 
-ancho = 1000
-alto = 600
+class Jugador(pygame.sprite.Sprite):
 
-
-class Rival(pygame.sprite.Sprite):
-
-    def __init__(self, pos):
+    def __init__(self, cl=verde):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([15, 15])
-        self.image.fill(rojo)
+        self.image = pygame.Surface([dj, dj])
+        self.image.fill(cl)
+        self.rect = self.image.get_rect()
+        self.rect.x = 100
+        self.rect.y = 100
+        self.velx = 0
+        self.vely = 0
+        self.salud = 100
+        self.bloques = pygame.sprite.Group()
+
+    def update(self):
+        self.rect.x += self.velx
+
+        col = pygame.sprite.spritecollide(self, self.bloques, False)
+        for b in col: 
+            if self.velx > 0:
+                if self.rect.right > b.rect.left:
+                    self.rect.right = b.rect.left
+            else:
+                if self.rect.left < b.rect.right:
+                    self.rect.left = b.rect.right
+            self.velx=0
+
+        if self.rect.left < 0:
+            self.rect.left = 0
+
+        if self.rect.right > ancho:
+            self.rect.right = ancho
+
+        self.rect.y += self.vely
+
+        col = pygame.sprite.spritecollide(self, self.bloques, False)
+        for b in col: 
+            if self.vely > 0:
+                if self.rect.bottom > b.rect.top:
+                    self.rect.bottom = b.rect.top
+            else:
+                if self.rect.top < b.rect.bottom:
+                    self.rect.top = b.rect.bottom
+            self.vely=0
+
+        if self.rect.top < 0:
+            self.rect.top = 0
+
+        if self.rect.bottom > alto:
+            self.rect.bottom = alto
+        
+class Bloque(pygame.sprite.Sprite):
+
+    def __init__(self, pos, dim, cl=blanco):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface(dim)
+        self.image.fill(cl)
         self.rect = self.image.get_rect()
         self.rect.x = pos[0]
         self.rect.y = pos[1]
-        self.radius = 120
         self.velx = 0
-        self.vely = -5
+        self.vely = 0
 
     def update(self):
         self.rect.x += self.velx
         self.rect.y += self.vely
 
-class Generador(pygame.sprite.Sprite):
-
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([60, 60])
-        self.image.fill(azul)
-        self.rect = self.image.get_rect()
-        self.rect.x = 50
-        self.rect.y = 500
-        self.temp = random.randrange(80, 120)
-        #self.crear = False
-
-    def update(self):
-        self. temp -= 1
-
-class Linea(pygame.sprite.Sprite):
-    def __init__(self, pos, dimension, nueva_vel):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface(dimension)
-        self.image.fill(blanco)
-        self.rect = self.image.get_rect()
-        self.rect.x = pos[0]
-        self.rect.y = pos[1]
-        self.nueva_velx = nueva_vel[0]
-        self.nueva_vely = nueva_vel[1]
-        self.tipo = 0
-
 if __name__ == "__main__":
     pygame.init()
-    pantalla=pygame.display.set_mode([ancho, alto])
+    pantalla = pygame.display.set_mode([ancho, alto])
+    pygame.display.set_caption("Video Juego")
+    fondo = pygame.image.load('fondo3.jpg')
+    info = fondo.get_rect()
+    f_ancho=info[2]
+    f_alto=info[3]
 
-    rivales = pygame.sprite.Group()
-    generadores = pygame.sprite.Group()
-    lineas = pygame.sprite.Group()
+    #Variable de posicion en X y Y
+    f_x = 0
+    f_y = 0
+    f_xleft = 0
+    f_yup = 0
 
-    g = Generador()
-    generadores.add(g)
+    #Variable de velocidad de desplazamiento en X y Y
+    f_vx = 0
+    f_vy = 0
+    f_vxleft = 0
+    f_vyup = 0
 
-    #ancho 1000 alto 600
-    #Poscision, dimensiones, neva velocidad
-    l2 = Linea([0, 0], [10, 600], [0, 5])
-    l2.tipo = 1
-    lineas.add(l2)
+    #Limite de desplzamiento hacia adelante y abajo
+    f_limx = ancho - f_ancho
+    f_limy = alto - f_alto
 
-    l = Linea([0, 0],[1000, 10], [5, 0])
-    lineas.add(l)
+    #Se debe cambiar orden para los otros sentidos
+    f_limx_positivo = f_ancho - ancho
+    f_limy_positivo = f_alto - alto
 
-    l3 = Linea([0, 590], [1000, 10], [-5, 0])
-    lineas.add(l3)
+    #Limites para avanzar o retroceder
+    lim_d = 799
+    lim_a = 499
+    lim_up = 10
+    lim_iz = 10
 
-    l4 = Linea([990, 0], [10, 600], [0, -5])
-    l4.tipo = 1
-    lineas.add(l4)
+    jugadores = pygame.sprite.Group()
+    bloques = pygame.sprite.Group()
 
+    b=Bloque([400,200] , [dj,dj*5])
+    bloques.add(b)
 
+    b=Bloque([3800,200] , [dj,dj*5])
+    bloques.add(b)
+
+    j = Jugador()
+    j.bloques=bloques
+    jugadores.add(j)
+    
     reloj=pygame.time.Clock()
-
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        
-        #Crear Rivales
-        for g in generadores:
-            if g.temp < 0:
-                r = Rival(g.rect.center)
-                rivales.add(r)
-                g.temp = random.randrange(80, 120)
-        
-        for r in rivales:
-            if r.rect.x < - 50:
-                rivales.remove(r)
+            if event.type == pygame.KEYUP:
+                j.velx = 0
+                j.vely = 0
 
-        for r in rivales:
-            ls_col = pygame.sprite.spritecollide(r, lineas, False)
-            for l in ls_col:
-                if l.tipo == 0:
-                    r.rect.top = l.rect.bottom
-                if l.tipo == 1:
-                    r.rect.right = l.rect.left
-                r.velx = l.nueva_velx
-                r.vely = l.nueva_vely
-        
-        rivales.update()
-        generadores.update()
+            if event.type == pygame.KEYDOWN:
 
-        pantalla.fill(negro)
-        rivales.draw(pantalla)
-        generadores.draw(pantalla)
-        lineas.draw(pantalla)
+                if event.key == pygame.K_ESCAPE:
+                    sys.exit()
+
+                if event.key == pygame.K_UP:
+                    j.velx = 0
+                    j.vely = -5
+                if event.key == pygame.K_DOWN:
+                    j.velx = 0
+                    j.vely = 5
+                if event.key == pygame.K_RIGHT:
+                    j.velx = 5
+                    j.vely = 0
+                if event.key == pygame.K_LEFT:
+                    j.velx = -5
+                    j.vely = 0
+            
+        #Movimiento en mapa hacia la derecha
+        if j.rect.right > lim_d:
+            j.rect.right = lim_d
+            f_vx = -5
+        else:
+            f_vx = 0
+
+        #Movimiento en mapa hacia abajo
+        if j.rect.bottom > lim_a:
+            j.rect.bottom = lim_a
+            f_vy = -5
+        else:
+            f_vy = 0
+
+        #Movimiento en mapa hacia izquierda
+        if j.rect.left < lim_iz:
+            j.rect.left = lim_iz
+            f_vxleft = 5
+        else:
+            f_vxleft = 0
+
+        #Movimiento en mapa hacia arriba
+        if j.rect.top < lim_up:
+            j.rect.top = lim_up
+            f_vyup = 5
+        else:
+            f_vyup = 0
+        
+        for b in bloques:
+            b.velx = f_vx   
+            b.vely = f_vy
+            b.velx = f_vxleft   
+            b.vely = f_vyup
+        
+        jugadores.update()
+        bloques.update()
+
+        pantalla.blit(fondo,[f_x, f_y])
+        
+        jugadores.draw(pantalla)
+        #bloques.draw(pantalla)
+
         pygame.display.flip()
-        reloj.tick(20)
+        reloj.tick(50)
+        
+        #Desplazamiento de la pantalla en la imagen
+        if f_x > f_limx:
+            f_x += f_vx
+
+        if f_y > f_limy:
+            f_y += f_vy
+
+        if f_xleft < f_limx_positivo:
+            f_xleft += f_vxleft
+
+        if f_yup < f_limy_positivo:
+            f_yup += f_vyup

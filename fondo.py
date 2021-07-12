@@ -28,6 +28,9 @@ class Fondo(pygame.sprite.Sprite):
         #Espacio entre la pantalla y el fondo
         self.f_limx = ancho - self.f_ancho
         self.f_limy = alto - self.f_alto
+        self.f_limleft = 0
+        self.f_limdown = 0
         #Limite para que el personaje se desplace en la imagen de fondo
         self.lim_d = ancho - 20
         self.lim_a = alto - 20
+        self.lim_iz = 20
