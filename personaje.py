@@ -94,8 +94,8 @@ class Personaje(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
-        if self.rect.right > ancho:
-            self.rect.right = ancho
+        if self.rect.right > anchoIma:
+            self.rect.right = anchoIma
 
         self.rect.y += self.vely
         
@@ -135,5 +135,5 @@ class Personaje(pygame.sprite.Sprite):
         if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior
 
-        if self.rect.bottom > alto:
-            self.rect.bottom = alto
+        if self.rect.bottom > altoIma:
+            self.rect.bottom = altoIma

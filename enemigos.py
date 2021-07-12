@@ -105,8 +105,8 @@ class Enemigos(pygame.sprite.Sprite):
 
         #Cambio de sprite y sentido del movimiento en el eje X después de la colición
         #con el limite derecho de la pantalla
-        if self.rect.right > ancho:
-            self.rect.right = ancho
+        if self.rect.right > anchoIma:
+            self.rect.right = anchoIma
             self.dir = self.despe = 1
             self.velx = -5
 
@@ -154,7 +154,7 @@ class Enemigos(pygame.sprite.Sprite):
 
         #Cambio de sprite y sentido del movimiento en el eje Y después de la colición
         #con el limite inferior de la pantalla
-        if self.rect.bottom > alto:
-            self.rect.bottom = alto
+        if self.rect.bottom > altoIma:
+            self.rect.bottom = altoIma
             self.dir = self.despe = 3
             self.vely = -5

@@ -10,6 +10,7 @@ from orcos import Orcos
 from modificadores import Modificadores
 from llaves import Llaves
 from flecha import Flecha
+from margen import Margen
 from funciones import *
 
 from imagenes import *
@@ -51,6 +52,7 @@ if __name__ == "__main__":
     modificadores = pygame.sprite.Group()
     llaves = pygame.sprite.Group()
     flechas = pygame.sprite.Group()
+    margenes = pygame.sprite.Group()
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -119,6 +121,18 @@ if __name__ == "__main__":
         b = Bloques(con, b, mb, [0, 0], despb = 9)
         con += 1
         bloques.add(b)
+
+    """marg = Margen([0, 0], [10, 1281])
+    margenes.add(marg)
+
+    marg = Margen([0, 0],[1920, 10])
+    margenes.add(marg)
+
+    marg = Margen([0, 1271], [1920, 10])
+    margenes.add(marg)
+
+    marg = Margen([1910, 0], [10, 1281])
+    margenes.add(marg)"""
 
     p.bloques = bloques
     p.generadores = generadores
@@ -226,7 +240,7 @@ if __name__ == "__main__":
 
         #Se remueven flechas que salen de las dimesiones de la pantalla
         for fle in flechas:
-            if fle.rect.x < 50 or fle.rect.y < 50 or fle.rect.x > ancho or fle.rect.y > alto:
+            if fle.rect.x < 50 or fle.rect.y < 50 or fle.rect.x > anchoIma or fle.rect.y > altoIma:
                 flechas.remove(fle)
 
         #Movimiento en mapa hacia la derecha
@@ -298,7 +312,7 @@ if __name__ == "__main__":
 
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantalla.blit(textoSalud, [2, 2])
-        pantalla.blit(texto, [500, 2])
+        pantalla.blit(texto, [450, 2])
         pantalla.blit(textoLlaves, [300, 2])
 
         #Aumento de corazones por generador
@@ -314,6 +328,7 @@ if __name__ == "__main__":
         modificadores.draw(pantalla)
         llaves.draw(pantalla)
         flechas.draw(pantalla)
+        margenes.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)
