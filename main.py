@@ -257,6 +257,20 @@ if __name__ == "__main__":
         else:
             f.f_vy = 0
 
+        #Movimiento en mapa hacia izquierda
+        if p.rect.left < f.lim_iz:
+            p.rect.left = f.lim_iz
+            f.f_vxleft = 5
+        else:
+            f.f_vxleft = 0
+
+        #Movimiento en mapa hacia arriba
+        if p.rect.top < f.lim_up:
+            p.rect.top = f.lim_up
+            f.f_vyup = 5
+        else:
+            f.f_vyup = 0
+
         for b in bloques:
             b.velx = f.f_vx   
             b.vely = f.f_vy
@@ -333,13 +347,24 @@ if __name__ == "__main__":
         pygame.display.flip()
         reloj.tick(30)
 
-        #Desplazamiento de la pantalla en la imagen de fondo a la derecha
+        #Desplazamiento de la pantalla en la imagen
         if f.f_x > f.f_limx:
             f.f_x += f.f_vx
 
-        #Desplazamiento de la pantalla en la imagen de fondo a abajo
         if f.f_y > f.f_limy:
             f.f_y += f.f_vy
+        
+        """if f.f_x < f.f_limx_positivo:
+            f.f_x += f.f_vxleft
+
+            if f.f_x > f.f_vxleft:
+                f.f_x = 0
+
+        if f.f_y < f.f_limy_positivo:
+            f.f_y += f.f_vyup
+
+            if f.f_y > f.f_vyup:
+                f.f_y = 0"""
 
     #Game Over
     if perder:

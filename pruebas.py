@@ -80,7 +80,7 @@ if __name__ == "__main__":
     pygame.init()
     pantalla = pygame.display.set_mode([ancho, alto])
     pygame.display.set_caption("Video Juego")
-    fondo = pygame.image.load('fondo3.jpg')
+    fondo = pygame.image.load('imagenes/fondo3.jpg')
     info = fondo.get_rect()
     f_ancho=info[2]
     f_alto=info[3]
@@ -114,11 +114,11 @@ if __name__ == "__main__":
     jugadores = pygame.sprite.Group()
     bloques = pygame.sprite.Group()
 
-    """b=Bloque([400,200] , [dj,dj*5])
+    b=Bloque([400,200] , [dj,dj*5])
     bloques.add(b)
 
     b=Bloque([3800,200] , [dj,dj*5])
-    bloques.add(b)"""
+    bloques.add(b)
 
     j = Jugador()
     j.bloques=bloques
@@ -182,10 +182,8 @@ if __name__ == "__main__":
             f_vyup = 0
         
         """for b in bloques:
-            b.velx = f_vx   
-            b.vely = f_vy
-            b.velx = f_vxleft   
-            b.vely = f_vyup"""
+            b.velx = 0   
+            b.vely = 0"""
         
         jugadores.update()
         bloques.update()
@@ -193,7 +191,7 @@ if __name__ == "__main__":
         pantalla.blit(fondo,[f_x, f_y])
         
         jugadores.draw(pantalla)
-        #bloques.draw(pantalla)
+        bloques.draw(pantalla)
 
         pygame.display.flip()
         reloj.tick(50)

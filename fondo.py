@@ -12,25 +12,33 @@ class Fondo(pygame.sprite.Sprite):
         info = m.get_rect()
         self.f_ancho=info[2]
         self.f_alto=info[3]
-
-        #Posicion
         self.rect.x = 0
         self.rect.y = 0
-        #Velocidad
         self.velx = 0
         self.vely = 0
 
+        #Variable de posicion en X y Y
         self.f_x = 0
         self.f_y = 0
+        self.f_xleft = 0
+        self.f_yup = 20
 
+        #Variable de velocidad de desplazamiento en X y Y
         self.f_vx = 0
         self.f_vy = 0
-        #Espacio entre la pantalla y el fondo
+        self.f_vxleft = 0
+        self.f_vyup = 0
+        
+        #Limite de desplzamiento hacia adelante y abajo
         self.f_limx = ancho - self.f_ancho
         self.f_limy = alto - self.f_alto
-        self.f_limleft = 0
-        self.f_limdown = 0
-        #Limite para que el personaje se desplace en la imagen de fondo
-        self.lim_d = ancho - 20
-        self.lim_a = alto - 20
-        self.lim_iz = 20
+
+        #Se debe cambiar orden para los otros sentidos
+        self.f_limx_positivo = self.f_ancho - ancho
+        self.f_limy_positivo = self.f_alto - alto
+
+        #Limites para avanzar o retroceder
+        self.lim_d = ancho -1
+        self.lim_a = alto - 1
+        self.lim_up = 21
+        self.lim_iz = 1
