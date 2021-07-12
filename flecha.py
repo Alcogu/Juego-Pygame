@@ -20,5 +20,6 @@ class Flecha(pygame.sprite.Sprite):
         self.vely = 0
 
     def update(self):
+
         self.rect.x += self.velx
         self.rect.y += self.vely

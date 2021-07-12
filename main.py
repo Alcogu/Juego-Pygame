@@ -165,21 +165,24 @@ if __name__ == "__main__":
                     p.dir = desp + 2
                     p.orientacion = 4
                 if event.key == pygame.K_SPACE and p.orientacion == 1:
-                    fle = Flecha(p.rect.midtop, mi, 2, despmfl = 0)
+                    fle = Flecha(p.rect.midtop, mi, 2, despmfl = 3)
                     flechas.add(fle)
                     fle.vely = -3
                 if event.key == pygame.K_SPACE and p.orientacion == 2:
-                    fle = Flecha(p.rect.midbottom, mi, 0, despmfl = 0)
+                    fle = Flecha(p.rect.midbottom, mi, 0, despmfl = 3)
                     flechas.add(fle)
                     fle.vely = 3
                 if event.key == pygame.K_SPACE and p.orientacion == 3:
-                    fle = Flecha(p.rect.midleft, mi, 1, despmfl = 0)
+                    fle = Flecha(p.rect.midleft, mi, 1, despmfl = 3)
                     flechas.add(fle)
                     fle.velx = -3
                 if event.key == pygame.K_SPACE and p.orientacion == 4:
-                    fle = Flecha(p.rect.midright, mi, 3, despmfl = 0)
+                    fle = Flecha(p.rect.midright, mi, 3, despmfl = 3)
                     flechas.add(fle)
                     fle.velx = 3
+
+                    fle.enemigos = enemigos
+                    fle.orcos = orcos
              
         #Generador de perros esqueletos y orcos
         for g in generadores:
@@ -194,6 +197,7 @@ if __name__ == "__main__":
 
                     e.bloques = bloques
                     e.personajes = personajes
+                    e.flechas = flechas
 
                 else:
                     o = Orcos((g.RetPos()), g.id, mo, despo = 1)
@@ -202,10 +206,28 @@ if __name__ == "__main__":
 
                     o.bloques = bloques
                     o.personajes = personajes
+                    o.flechas = flechas
 
                 g.temp = 200
                 g.crear = False
                 g.pob += 1
+
+        #destruye orcos
+        for fle in flechas:
+            ls_imp = pygame.sprite.spritecollide(fle, orcos, True)
+            if len(ls_imp)>0:
+                flechas.remove(fle)
+
+        #destruye enemigos
+        for fle in flechas:
+            ls_imp = pygame.sprite.spritecollide(fle, enemigos, True)
+            if len(ls_imp)>0:
+                flechas.remove(fle)
+
+        #Se remueven flechas que salen de las dimesiones de la pantalla
+        for fle in flechas:
+            if fle.rect.x < 50 or fle.rect.y < 50 or fle.rect.x > ancho or fle.rect.y > alto:
+                flechas.remove(fle)
 
         #Movimiento en mapa hacia la derecha
         if p.rect.right > f.lim_d:
