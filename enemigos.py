@@ -101,10 +101,10 @@ class Enemigos(pygame.sprite.Sprite):
                     self.velx = 5
             p.salud -= 1
 
-        if self.rect.left < 0:
+        """if self.rect.left < 0:
             self.rect.left = 0
             self.dir = self.despe = 2
-            self.velx = 5
+            self.velx = 5"""
 
         if self.rect.right > anchoIma:
             self.rect.right = anchoIma
@@ -154,10 +154,10 @@ class Enemigos(pygame.sprite.Sprite):
                     self.dir = self.despe = 0
                     self.vely = 5
 
-        if self.rect.top < self.limitesuperior:
+        """if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior
             self.dir = self.despe = 0
-            self.vely = 5
+            self.vely = 5"""
 
         if self.rect.bottom > altoIma:
             self.rect.bottom = altoIma

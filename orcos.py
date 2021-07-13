@@ -102,10 +102,10 @@ class Orcos(pygame.sprite.Sprite):
                     self.velx = 3
             p.salud -= 2
  
-        if self.rect.left < 0:
+        """if self.rect.left < 0:
             self.rect.left = 0
             self.dir = self.dir = 2
-            self.velx = 3
+            self.velx = 3"""
 
         if self.rect.right > anchoIma:
             self.rect.right = anchoIma
@@ -155,10 +155,10 @@ class Orcos(pygame.sprite.Sprite):
                     self.vely = 3
             p.salud -= 2
 
-        if self.rect.top < self.limitesuperior:
+        """if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior
             self.dir = self.dir = 0
-            self.vely = 3
+            self.vely = 3"""
 
         if self.rect.bottom > altoIma:
             self.rect.bottom = altoIma

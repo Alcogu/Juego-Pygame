@@ -79,9 +79,8 @@ if __name__ == "__main__":
         llaves.add(mll)
 
     #Generador
-    ls_gen = [(350, 130), (500, 200), (100, 200), 
-    #(350, 1100), (1600, 75), (1600, 1100)
-    ]
+    ls_gen = [(350, 130), (500, 200), (100, 290), (350, 1100), (300,650), (990, 270), 
+                (710, 770), (1000, 900), (1600, 75), (1500, 669), (1600, 1100)]
     con = 0
     for p in ls_gen:
         g = Generador(con, p, mg, [1, 1], despg=0)
@@ -122,16 +121,16 @@ if __name__ == "__main__":
         con += 1
         bloques.add(b)
 
-    marg = Margen([50, 50], [10, 1331])
+    marg = Margen([10, 10], [10, 1331])
     margenes.add(marg)
 
-    marg = Margen([50, 50],[1969, 10])
+    marg = Margen([10, 10],[1969, 10])
     margenes.add(marg)
 
-    marg = Margen([50, 1331], [1969, 10])
+    marg = Margen([10, 1331], [1969, 10])
     margenes.add(marg)
 
-    marg = Margen([1969, 50], [10, 1331])
+    marg = Margen([1969, 10], [10, 1331])
     margenes.add(marg)
 
     p.bloques = bloques
@@ -360,7 +359,7 @@ if __name__ == "__main__":
         modificadores.draw(pantalla)
         llaves.draw(pantalla)
         flechas.draw(pantalla)
-        #margenes.draw(pantalla)
+        margenes.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)

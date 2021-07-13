@@ -18,7 +18,7 @@ class Personaje(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.rect.x = 150
-        self.rect.y = 150
+        self.rect.y = 50
         self.velx = 0
         self.vely = 0
         self.velxx = 0
@@ -102,7 +102,7 @@ class Personaje(pygame.sprite.Sprite):
             self.soundkey.play()
             self.contLlaves += 1
         
-        """col = pygame.sprite.spritecollide(self, self.margenes, False)
+        col = pygame.sprite.spritecollide(self, self.margenes, False)
         for mar in col: 
             if self.velx > 0:
                 if self.rect.right > mar.rect.left:
@@ -110,16 +110,7 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.left < mar.rect.right:
                     self.rect.left = mar.rect.right
-            self.velx = 0"""
-        col = pygame.sprite.spritecollide(self, self.margenes, False)
-        for b in col: 
-            if self.velx > 0:
-                if self.rect.right > b.rect.left:
-                    self.rect.right = b.rect.left
-            else:
-                if self.rect.left < b.rect.right:
-                    self.rect.left = b.rect.right
-            self.velx=0
+            self.velx = 0
           
         if self.rect.left < 0:
             self.rect.left = 0
