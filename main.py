@@ -54,11 +54,16 @@ if __name__ == "__main__":
     flechas = pygame.sprite.Group()
     margenes = pygame.sprite.Group()
 
-    f = Fondo(imgFondo)
-    fondos.add(f)
-
     musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
     musicaFondo.play(0, -1)
+
+    #Eleccion del pj y sus movimientos
+    desp = 0
+    p = Personaje(mp, [3, 5], desp)
+    personajes.add(p)
+
+    f = Fondo(imgFondo)
+    fondos.add(f)
 
     #Modificador Corazones
     ls_modificadores = ([posRandomX, posRandomY], [posRandomX1, posRandomY1],
@@ -83,15 +88,9 @@ if __name__ == "__main__":
                 (710, 770), (1000, 900), (1600, 75), (1500, 669), (1600, 1100)]
     con = 0
     for p in ls_gen:
-        g = Generador(con, p, mg, [1, 1], despg=0)
+        g = Generador(con, p, mg, [1, 1], despg = 0)
         con += 1
         generadores.add(g)
-
-    #Eleccion del pj y sus movimientos
-    desp = 0
-    p = Personaje(mp, [3, 5], desp)
-    personajes.add(p)
-
 
     ls_bloques = ([100, 120], [1600, 332], [1090, 890], [679, 499], [1763, 499])
     con = 0
@@ -242,7 +241,7 @@ if __name__ == "__main__":
 
         #Se remueven flechas que salen de las dimesiones de la pantalla
         for fle in flechas:
-            if fle.rect.x < 50 or fle.rect.y < 50 or fle.rect.x > anchoIma or fle.rect.y > altoIma:
+            if fle.rect.x < 5 or fle.rect.y < 5 or fle.rect.x > anchoIma or fle.rect.y > altoIma:
                 flechas.remove(fle)
 
         #Movimiento en mapa hacia la derecha
@@ -273,6 +272,7 @@ if __name__ == "__main__":
         else:
             f.f_vyup = 0
 
+        #Ciclos para que los objetos sin movimiento no pierdan su lugar con el movimiento del Pj
         for b in bloques:
             b.velx = f.f_vx   
             b.vely = f.f_vy
@@ -359,7 +359,7 @@ if __name__ == "__main__":
         modificadores.draw(pantalla)
         llaves.draw(pantalla)
         flechas.draw(pantalla)
-        margenes.draw(pantalla)
+        #margenes.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)

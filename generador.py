@@ -22,7 +22,7 @@ class Generador(pygame.sprite.Sprite):
         self.vely = 0
         self.velxx = 0
         self.velyy = 0
-        self.lim = 3
+        self.lim = 0
         self.pob = 0
         self.id = id
         self.temp = 200

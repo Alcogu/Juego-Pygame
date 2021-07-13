@@ -1,13 +1,14 @@
 import random
 
 #Colores
-azul = [76,160,233]
-rojo = [245,15,15]
-verde = [47, 163, 41]
-blanco = [255,255,255]
-negro = [0,0,0]
-dorado = [218, 167, 29]
-morado = [173, 164, 234]
+
+negro   =   [0,0,0]
+rojo    =   [245,15,15]
+azul    =   [76,160,233]
+verde   =   [47, 163, 41]
+blanco  =   [255,255,255]
+dorado  =   [218, 167, 29]
+morado  =   [173, 164, 234]
 
 #-------------------------------------------------------------------------
 #dimensiones de la pantalla
@@ -21,26 +22,26 @@ altoIma = 1281
 #-------------------------------------------------------------------------
 #Posiciones aleatorias para los modificadores de vida
 
-posRandomX = (random.randint(90, 600))
-posRandomY = (random.randint(90, 400))
+posRandomX = (random.randint(90, 1810))
+posRandomY = (random.randint(90, 1191))
 
-posRandomX1 = (random.randint(90, 1920))
-posRandomY1 = (random.randint(90, 1281))
+posRandomX1 = (random.randint(90, 1810))
+posRandomY1 = (random.randint(90, 1191))
 
-posRandomX2 = (random.randint(90, 1920))
-posRandomY2 = (random.randint(90, 1281))
+posRandomX2 = (random.randint(90, 1810))
+posRandomY2 = (random.randint(90, 1191))
 
-posRandomX3 = (random.randint(90, 1920))
-posRandomY3 = (random.randint(90, 1281))
+posRandomX3 = (random.randint(90, 1810))
+posRandomY3 = (random.randint(90, 1191))
 
 #-------------------------------------------------------------------------
 #Posiciones aleatorias para los modificadores de Llave
 
-posLlaveX = (random.randint(90, 600))
-posLlaveY = (random.randint(90, 400))
+posLlaveX = (random.randint(90, 1810))
+posLlaveY = (random.randint(90, 1191))
 
-posLlaveX1 = (random.randint(90, 1920))
-posLlaveY1 = (random.randint(90, 1281))
+posLlaveX1 = (random.randint(90, 1810))
+posLlaveY1 = (random.randint(90, 1191))
 
-posLlaveX2 = (random.randint(90, 1920))
-posLlaveY2 = (random.randint(90, 1281))
+posLlaveX2 = (random.randint(90, 1810))
+posLlaveY2 = (random.randint(90, 1191))
