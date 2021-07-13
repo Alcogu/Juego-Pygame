@@ -72,7 +72,7 @@ class Bloque(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
         self.velxx = 0
-        self.velyx = 0
+        self.velyy = 0
 
     def update(self):
         self.rect.x += self.velx
@@ -110,10 +110,10 @@ if __name__ == "__main__":
     f_limy_positivo = f_alto - alto
 
     #Limites para avanzar o retroceder
-    lim_d = ancho -1
-    lim_a = alto - 1
-    lim_up = 1
-    lim_iz = 1
+    lim_d = ancho - 100
+    lim_a = alto - 50
+    lim_up = 50
+    lim_iz = 50
 
     jugadores = pygame.sprite.Group()
     bloques = pygame.sprite.Group()
@@ -121,7 +121,16 @@ if __name__ == "__main__":
     b=Bloque([400,200] , [dj,dj*5])
     bloques.add(b)
 
-    b=Bloque([3800,200] , [dj,dj*5])
+    b=Bloque([0,0] , [10,3000])
+    bloques.add(b)
+
+    b=Bloque([0,0] , [4000,10])
+    bloques.add(b)
+
+    b=Bloque([0,3000] , [4000,10])
+    bloques.add(b)
+
+    b=Bloque([4000,0] , [10,4000])
     bloques.add(b)
 
     j = Jugador()

@@ -38,7 +38,7 @@ class Fondo(pygame.sprite.Sprite):
         self.f_limy_positivo = self.f_alto - alto
 
         #Limites para avanzar o retroceder
-        self.lim_d = ancho - 50
-        self.lim_a = alto - 50
-        self.lim_up = 50
-        self.lim_iz = 50
+        self.lim_d = ancho - 150
+        self.lim_a = alto - 150
+        self.lim_up = 80
+        self.lim_iz = 80

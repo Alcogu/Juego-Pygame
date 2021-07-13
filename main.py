@@ -122,17 +122,17 @@ if __name__ == "__main__":
         con += 1
         bloques.add(b)
 
-    """marg = Margen([0, 0], [10, 1281])
+    marg = Margen([50, 50], [10, 1331])
     margenes.add(marg)
 
-    marg = Margen([0, 0],[1920, 10])
+    marg = Margen([50, 50],[1969, 10])
     margenes.add(marg)
 
-    marg = Margen([0, 1271], [1920, 10])
+    marg = Margen([50, 1331], [1969, 10])
     margenes.add(marg)
 
-    marg = Margen([1910, 0], [10, 1281])
-    margenes.add(marg)"""
+    marg = Margen([1969, 50], [10, 1331])
+    margenes.add(marg)
 
     p.bloques = bloques
     p.generadores = generadores
@@ -140,6 +140,7 @@ if __name__ == "__main__":
     p.orcos = orcos
     p.modificadores = modificadores
     p.llaves = llaves
+    p.margenes = margenes
 
     reloj = pygame.time.Clock()
     ganar = False
@@ -212,6 +213,7 @@ if __name__ == "__main__":
                     e.bloques = bloques
                     e.personajes = personajes
                     e.flechas = flechas
+                    e.margenes = margenes
 
                 else:
                     o = Orcos((g.RetPos()), g.id, mo, despo = 1)
@@ -221,6 +223,7 @@ if __name__ == "__main__":
                     o.bloques = bloques
                     o.personajes = personajes
                     o.flechas = flechas
+                    o.margenes = margenes
 
                 g.temp = 200
                 g.crear = False
@@ -274,18 +277,32 @@ if __name__ == "__main__":
         for b in bloques:
             b.velx = f.f_vx   
             b.vely = f.f_vy
+            b.velxx = f.f_vxleft  
+            b.velyy = f.f_vyup
 
         for g in generadores:
             g.velx = f.f_vx   
             g.vely = f.f_vy
+            g.velxx = f.f_vxleft  
+            g.velyy = f.f_vyup
 
         for m in modificadores:
             m.velx = f.f_vx   
             m.vely = f.f_vy
+            m.velxx = f.f_vxleft  
+            m.velyy = f.f_vyup
 
         for mll in llaves:
             mll.velx = f.f_vx   
             mll.vely = f.f_vy
+            mll.velxx = f.f_vxleft  
+            mll.velyy = f.f_vyup
+
+        for mar in margenes:
+            mar.velx = f.f_vx  
+            mar.vely = f.f_vy
+            mar.velxx = f.f_vxleft  
+            mar.velyy = f.f_vyup
 
         #Condición para fin de juego por salud
         for p in personajes:
@@ -310,6 +327,7 @@ if __name__ == "__main__":
         modificadores.update()
         llaves.update()
         flechas.update()
+        margenes.update()
         
         #Tiempo transcurrido de la partida
         tiempo = pygame.time.get_ticks() // 1000
@@ -342,7 +360,7 @@ if __name__ == "__main__":
         modificadores.draw(pantalla)
         llaves.draw(pantalla)
         flechas.draw(pantalla)
-        margenes.draw(pantalla)
+        #margenes.draw(pantalla)
         
         pygame.display.flip()
         reloj.tick(30)
@@ -354,7 +372,7 @@ if __name__ == "__main__":
         if f.f_y > f.f_limy:
             f.f_y += f.f_vy
         
-        """if f.f_x < f.f_limx_positivo:
+        if f.f_x < f.f_limx_positivo:
             f.f_x += f.f_vxleft
 
             if f.f_x > f.f_vxleft:
@@ -364,7 +382,7 @@ if __name__ == "__main__":
             f.f_y += f.f_vyup
 
             if f.f_y > f.f_vyup:
-                f.f_y = 0"""
+                f.f_y = 0
 
     #Game Over
     if perder:

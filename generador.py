@@ -20,6 +20,8 @@ class Generador(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
+        self.velxx = 0
+        self.velyy = 0
         self.lim = 3
         self.pob = 0
         self.id = id
@@ -39,3 +41,5 @@ class Generador(pygame.sprite.Sprite):
 
         self.rect.x += self.velx
         self.rect.y += self.vely
+        self.rect.x += self.velxx
+        self.rect.y += self.velyy

@@ -17,10 +17,12 @@ class Personaje(pygame.sprite.Sprite):
         self.image = self.mp[self.dir][self.col]
         self.rect = self.image.get_rect()
 
-        self.rect.x = 70
-        self.rect.y = 70
+        self.rect.x = 150
+        self.rect.y = 150
         self.velx = 0
         self.vely = 0
+        self.velxx = 0
+        self.velyy = 0
         self.salud = 5
         self.contLlaves = 0
         self.limitesuperior = 20
@@ -32,6 +34,7 @@ class Personaje(pygame.sprite.Sprite):
         self.modificadores = pygame.sprite.Group()
         self.llaves = pygame.sprite.Group()
         self.orcos = pygame.sprite.Group()
+        self.margenes = pygame.sprite.Group()
 
         #Sounds
         self.morir = pygame.mixer.Sound('sounds/muerte.wav')
@@ -48,36 +51,45 @@ class Personaje(pygame.sprite.Sprite):
                 self.col = self.anm_ini
 
         self.rect.x += self.velx
+        self.rect.x += self.velxx
             
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.velx > 0:
+                if self.rect.right > b.rect.left:
                     self.rect.right = b.rect.left
             else:
+                if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
             self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.generadores, False)
         for g in col: 
             if self.velx > 0:
+                if self.rect.right > g.rect.left:
                     self.rect.right = g.rect.left
             else:
+                if self.rect.left < g.rect.right:
                     self.rect.left = g.rect.right
             self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col:
             if self.velx > 0:
+                if self.rect.right > e.rect.left:
                     self.rect.right = e.rect.left
             else:
+                if self.rect.left < e.rect.right:
                     self.rect.left = e.rect.right
             self.velx = 0
 
         col = pygame.sprite.spritecollide(self, self.orcos, False)
         for o in col:
             if self.velx > 0:
+                if self.rect.right > o.rect.left:
                     self.rect.right = o.rect.left
             else:
+                if self.rect.left < o.rect.right:
                     self.rect.left = o.rect.right
             self.velx = 0
 
@@ -89,8 +101,26 @@ class Personaje(pygame.sprite.Sprite):
         for k in col:
             self.soundkey.play()
             self.contLlaves += 1
-            
-
+        
+        """col = pygame.sprite.spritecollide(self, self.margenes, False)
+        for mar in col: 
+            if self.velx > 0:
+                if self.rect.right > mar.rect.left:
+                    self.rect.right = mar.rect.left
+            else:
+                if self.rect.left < mar.rect.right:
+                    self.rect.left = mar.rect.right
+            self.velx = 0"""
+        col = pygame.sprite.spritecollide(self, self.margenes, False)
+        for b in col: 
+            if self.velx > 0:
+                if self.rect.right > b.rect.left:
+                    self.rect.right = b.rect.left
+            else:
+                if self.rect.left < b.rect.right:
+                    self.rect.left = b.rect.right
+            self.velx=0
+          
         if self.rect.left < 0:
             self.rect.left = 0
 
@@ -98,39 +128,57 @@ class Personaje(pygame.sprite.Sprite):
             self.rect.right = anchoIma
 
         self.rect.y += self.vely
+        self.rect.y += self.velyy
         
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.vely > 0:
+                if self.rect.bottom > b.rect.top:
                     self.rect.bottom = b.rect.top
             else:
+                if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
             self.vely = 0
         
         col = pygame.sprite.spritecollide(self, self.generadores, False)
-
         for g in col: 
             if self.vely > 0:
+                if self.rect.bottom > g.rect.top:
                     self.rect.bottom = g.rect.top
             else:
+                if self.rect.top < g.rect.bottom:
                     self.rect.top = g.rect.bottom
             self.vely = 0
 
         col = pygame.sprite.spritecollide(self, self.enemigos, False)
         for e in col: 
             if self.vely > 0:
+                if self.rect.bottom > e.rect.top:
                     self.rect.bottom = e.rect.top
             else:
+                if self.rect.top < e.rect.bottom:
                     self.rect.top = e.rect.bottom
             self.vely=0
 
         col = pygame.sprite.spritecollide(self, self.orcos, False)
         for o in col: 
             if self.vely > 0:
+                if self.rect.bottom > o.rect.top:
                     self.rect.bottom = o.rect.top
             else:
+                if self.rect.top < o.rect.bottom:
                     self.rect.top = o.rect.bottom
             self.vely=0
+
+        col = pygame.sprite.spritecollide(self, self.margenes, False)
+        for mar in col: 
+            if self.vely > 0:
+                if self.rect.bottom > mar.rect.top:
+                    self.rect.bottom = mar.rect.top
+            else:
+                if self.rect.top < mar.rect.bottom:
+                    self.rect.top = mar.rect.bottom
+            self.vely = 0
 
         if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior

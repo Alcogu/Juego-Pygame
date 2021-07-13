@@ -20,13 +20,15 @@ class Enemigos(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
+        self.velxx = 0
+        self.velyy = 0
         self.limitesuperior = 20
         self.idgen = idg
 
         self.bloques = pygame.sprite.Group()
         self.personajes = pygame.sprite.Group()
+        self.margenes = pygame.sprite.Group()
 
-    #Dirección de salida aleatoria
     def CambiarDirDogs(self):
 
         eje = random.randrange(100)
@@ -57,103 +59,106 @@ class Enemigos(pygame.sprite.Sprite):
                 self.col=self.anm_ini
 
         self.rect.x += self.velx
+        self.rect.x += self.velxx
+
+        col = pygame.sprite.spritecollide(self, self.margenes, False)
+        for mar in col: 
+            if self.velx > 0:
+                if self.rect.right > mar.rect.left:
+                    self.rect.right = mar.rect.left
+                    self.dir = self.despe = 1
+                    self.velx = -5
+            else:
+                if self.rect.left < mar.rect.right:
+                    self.rect.left = mar.rect.right
+                    self.dir = self.despe = 2
+                    self.velx = 5
 
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col:
-            #Si hay desplazamiento en X
             if self.velx > 0:
-                #Si el lado derecho del enemigo coliciona con el lado izquierdo del bloque se detiene
+                if self.rect.right > b.rect.left:
                     self.rect.right = b.rect.left
-                    #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 1
-                    #Movimiento hacia la izquierda después de la colición
                     self.velx = -5
             else:
-                #Si el lado izquierdo del enemigo coliciona con el lado derecho del bloque se detiene
+                if self.rect.left < b.rect.right:
                     self.rect.left = b.rect.right
-                    #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 2
-                    #Movimiento hacia la derecha después de la colición
                     self.velx = 5
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col:
-            #Si hay desplazamiento en X
             if self.velx > 0:
-                #Si el lado derecho del enemigo coliciona con el lado izquierdo del personaje se detiene
+                if self.rect.right > p.rect.left:
                     self.rect.right = p.rect.left
-                    #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 1
-                    #Movimiento hacia la izquierda después de la colición
                     self.velx = -5
             else:
-                #Si el lado izquierdo del enemigo coliciona con el lado derecho del bloque se detiene
+                if self.rect.left < p.rect.right:
                     self.rect.left = p.rect.right
-                    #Cambia la fila del sprite del enemigo
                     self.dir = self.despe = 2
-                    #Movimiento hacia la derecha después de la colición
                     self.velx = 5
-            #En caso de colición en el eje X se reduce salud del Personaje
             p.salud -= 1
 
-        #Cambio de sprite y sentido del movimiento en el eje X después de la colición
-        #con el limite izquierdo de la pantalla
         if self.rect.left < 0:
             self.rect.left = 0
             self.dir = self.despe = 2
             self.velx = 5
 
-        #Cambio de sprite y sentido del movimiento en el eje X después de la colición
-        #con el limite derecho de la pantalla
         if self.rect.right > anchoIma:
             self.rect.right = anchoIma
             self.dir = self.despe = 1
             self.velx = -5
 
         self.rect.y += self.vely
+        self.rect.y += self.velyy
         
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.vely > 0:
-                #Se cambia de sprite y el enemigo se desplaza hacia arriba después de colicionar
-                #en el eje Y con el bloque
+                if self.rect.bottom > b.rect.top:
                     self.rect.bottom = b.rect.top
                     self.dir = self.despe = 3
                     self.vely = -5
             else:
-                #Se cambia de sprite y el enemigo se desplaza hacia abajo después de colicionar
-                #en el eje Y con el bloque
+                if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
                     self.dir = self.despe = 0
                     self.vely = 5
 
         col = pygame.sprite.spritecollide(self, self.personajes, False)
         for p in col:
-            #Si hay desplazamiento en el eje Y
             if self.vely > 0:
-                #Se cambia de sprite y el enemigo se desplaza hacia arriba después de colicionar
-                #en el eje Y con el personaje
+                if self.rect.bottom > p.rect.top:
                     self.rect.bottom = p.rect.top
                     self.dir = self.despe = 3
                     self.vely = -5
             else:
-                #Se cambia de sprite y el enemigo se desplaza hacia abajo después de colicionar
-                #en el eje Y con el personaje
+                if self.rect.top < p.rect.bottom:
                     self.rect.top = p.rect.bottom
                     self.dir = self.despe = 0
                     self.vely = 5
-            #Se resta salud al colicionar en el eje Y
             p.salud -= 1
 
-        #Cambio de sprite y sentido del movimiento en el eje Y después de la colición
-        #con el limite superior de la pantalla
+        col = pygame.sprite.spritecollide(self, self.margenes, False)
+        for mar in col: 
+            if self.vely > 0:
+                if self.rect.bottom > mar.rect.top:
+                    self.rect.bottom = mar.rect.top
+                    self.dir = self.despe = 3
+                    self.vely = -5
+            else:
+                if self.rect.top < mar.rect.bottom:
+                    self.rect.top = mar.rect.bottom
+                    self.dir = self.despe = 0
+                    self.vely = 5
+
         if self.rect.top < self.limitesuperior:
             self.rect.top = self.limitesuperior
             self.dir = self.despe = 0
             self.vely = 5
 
-        #Cambio de sprite y sentido del movimiento en el eje Y después de la colición
-        #con el limite inferior de la pantalla
         if self.rect.bottom > altoIma:
             self.rect.bottom = altoIma
             self.dir = self.despe = 3
