@@ -1,6 +1,5 @@
 import pygame
 
-from flecha import Flecha
 from constantes import *
 
 class Personaje(pygame.sprite.Sprite):

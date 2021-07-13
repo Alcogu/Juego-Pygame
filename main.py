@@ -57,10 +57,7 @@ if __name__ == "__main__":
     musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
     musicaFondo.play(0, -1)
 
-    #Eleccion del pj y sus movimientos
-    desp = 0
-    p = Personaje(mp, [3, 5], desp)
-    personajes.add(p)
+    
 
     f = Fondo(imgFondo)
     fondos.add(f)
@@ -131,6 +128,11 @@ if __name__ == "__main__":
 
     marg = Margen([1969, 10], [10, 1331])
     margenes.add(marg)
+
+    #Eleccion del pj y sus movimientos
+    desp = 0
+    p = Personaje(mp, [3, 5], desp)
+    personajes.add(p)
 
     p.bloques = bloques
     p.generadores = generadores
