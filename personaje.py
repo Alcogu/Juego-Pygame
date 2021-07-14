@@ -51,7 +51,7 @@ class Personaje(pygame.sprite.Sprite):
 
         self.rect.x += self.velx
         self.rect.x += self.velxx
-            
+        
         col = pygame.sprite.spritecollide(self, self.bloques, False)
         for b in col: 
             if self.velx > 0:
@@ -128,7 +128,8 @@ class Personaje(pygame.sprite.Sprite):
             else:
                 if self.rect.top < b.rect.bottom:
                     self.rect.top = b.rect.bottom
-            self.vely = 0
+            self.vely=0
+        
         
         col = pygame.sprite.spritecollide(self, self.generadores, False)
         for g in col: 

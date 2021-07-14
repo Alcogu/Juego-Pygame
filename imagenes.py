@@ -1,7 +1,7 @@
 import pygame
 
 #Imagenes
-imgFondo = pygame.image.load('imagenes/fondoprado2.jpg')
+imgFondo = pygame.image.load('imagenes/fondoprado.jpg')
 imgPersonaje = pygame.image.load('imagenes/centauros.png')
 imgBloque = pygame.image.load('imagenes/bloques.png')
 imgGenerador = pygame.image.load('imagenes/fosa.png')

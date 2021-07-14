@@ -57,8 +57,6 @@ if __name__ == "__main__":
     musicaFondo = pygame.mixer.Sound('sounds/El pueblo.wav')
     musicaFondo.play(0, -1)
 
-    
-
     f = Fondo(imgFondo)
     fondos.add(f)
 
@@ -82,7 +80,7 @@ if __name__ == "__main__":
 
     #Generador
     ls_gen = [(350, 130), (500, 200), (100, 290), (350, 1100), (300,650), (990, 270), 
-                (710, 770), (1000, 900), (1600, 75), (1500, 669), (1600, 1100)]
+                (710, 770), (1000, 900), (1600, 75), (1500, 669), (1600, 900)]
     con = 0
     for p in ls_gen:
         g = Generador(con, p, mg, [1, 1], despg = 0)
@@ -103,7 +101,40 @@ if __name__ == "__main__":
         con += 1
         bloques.add(b)
 
-    ls_bloques = ([645, 10], [140, 510], [1100, 807], [570, 1150], [1610, 1130])
+    #Bloque grande
+    #---------------------------------------------------------------------------------------------------
+
+    ls_bloques = ([120, 440], [610, 1000], [900, 400], [1700, 200])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 4)
+        con += 1
+        bloques.add(b)
+
+    ls_bloques = ([168, 440], [658, 1000], [948, 400], [1748, 200])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [1, 1], despb = 4)
+        con += 1
+        bloques.add(b)
+
+    ls_bloques = ([120, 488], [610, 1048], [900, 448], [1700, 248])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [0, 0], despb = 5)
+        con += 1
+        bloques.add(b)
+
+    ls_bloques = ([168, 488], [658, 1048], [948, 448], [1748, 248])
+    con = 0
+    for b in ls_bloques:
+        b = Bloques(con, b, mb, [1, 1], despb = 5)
+        con += 1
+        bloques.add(b)
+
+    #---------------------------------------------------------------------------------------------------
+
+    ls_bloques = ([645, 10], [350, 510], [1100, 807], [570, 1150], [1610, 1130])
     con = 0
     for b in ls_bloques:
         b = Bloques(con, b, mb, [0, 0], despb = 6)
