@@ -361,11 +361,6 @@ if __name__ == "__main__":
         flechas.update()
         margenes.update()
         
-        #Tiempo transcurrido de la partida
-        tiempo = pygame.time.get_ticks() // 1000
-        infoTime = "Tiempo: " + str(tiempo)
-        texto = fuente.render(infoTime, False, morado)
-
         #Salud del personaje
         infoSalud = "Salud: "
         textoSalud = fuente.render(infoSalud, False, rojo)
@@ -374,9 +369,14 @@ if __name__ == "__main__":
         infoLlaves = "Llaves: " + str(p.contLlaves)
         textoLlaves = fuente.render(infoLlaves, False, dorado)
 
+        #Tiempo transcurrido de la partida
+        tiempo = pygame.time.get_ticks() // 1000
+        infoTime = "Tiempo: " + str(tiempo)
+        textoTiempo = fuente.render(infoTime, False, morado)
+
         pantalla.blit(imgFondo, [f.f_x, f.f_y])
         pantalla.blit(textoSalud, [2, 2])
-        pantalla.blit(texto, [450, 2])
+        pantalla.blit(textoTiempo, [450, 2])
         pantalla.blit(textoLlaves, [300, 2])
 
         #Aumento de corazones por generador
